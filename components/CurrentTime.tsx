@@ -1,12 +1,33 @@
-import { Text, View } from "react-native";
-import { getUserCurrentDate } from "../utils/dateUtils";
+import { StyleSheet, Text, View } from "react-native";
+import { getUserCurrentDate, getDayOfTheWeek } from "../utils/dateUtils";
 
 function CurrentTime() {
+  const date = getUserCurrentDate();
+
   return (
-    <View>
-      <Text>{getUserCurrentDate()}</Text>
+    <View style={styles.container}>
+      <Text>{`<`}</Text>
+      <View style={styles.dateContainer}>
+        <Text>{date.toLocaleDateString()}</Text>
+        <Text>{getDayOfTheWeek(date)}</Text>
+      </View>
+      <Text>{`>`}</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 16,
+    justifyContent: "space-between",
+  },
+  dateContainer: {
+    alignItems: "center",
+    backgroundColor: "#FFF",
+    padding: 8,
+  },
+});
 
 export default CurrentTime;

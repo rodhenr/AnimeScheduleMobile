@@ -1,22 +1,32 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { fakeData } from "../data/fakeData";
 import AnimeCard from "../components/AnimeCard/Index";
+import CurrentTime from "../components/CurrentTime";
 
-export default function Home() {
+function Home() {
   return (
-    <View style={styles.container}>
-      {fakeData.map((i) => (
-        <AnimeCard data={i} key={i.mediaId} />
-      ))}
+    <View style={styles.innerContainer}>
+      <CurrentTime />
+      <View style={styles.cardsContainer}>
+        {fakeData.map((i) => (
+          <AnimeCard data={i} key={i.mediaId} />
+        ))}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  innerContainer: {
     alignItems: "center",
-    backgroundColor: "#262626",
+    gap: 16,
+    paddingTop: 16,
+  },
+  cardsContainer: {
+    alignItems: "center",
     flex: 1,
     gap: 16,
   },
 });
+
+export default Home;

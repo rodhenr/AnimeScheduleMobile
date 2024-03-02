@@ -1,26 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ScrollView } from "react-native";
-import ThemeButton from "./components/ThemeButton";
-import CurrentTime from "./components/CurrentTime";
+import { StatusBar, SafeAreaView, StyleSheet, View } from "react-native";
+import { SafeAreaView as SafeAreaViewAndroid } from "react-native-safe-area-context";
 import Home from "./pages/Home";
+import Layout from "./layouts/Layout";
 
 export default function App() {
   return (
-    <ScrollView>
+    <SafeAreaViewAndroid style={{ flex: 1 }}>
       <View style={styles.container}>
-        <ThemeButton />
-        <CurrentTime />
-        <Home />
-        <StatusBar style="inverted" />
+        <Layout>
+          <Home />
+        </Layout>
       </View>
-    </ScrollView>
+    </SafeAreaViewAndroid>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 32,
-    paddingTop: 32,
   },
 });
