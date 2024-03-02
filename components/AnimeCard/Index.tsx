@@ -12,14 +12,13 @@ function Index({ data }: Props) {
   return (
     <ImageBackground
       source={{
-        uri: data.coverImage,
+        uri: data.media.coverImages.extraLarge,
       }}
       alt="animeImage"
       style={styles.container}
     >
-      <TopBar />
-      <Sources sources={data.externalLinks} />
-      <Name name={data.title.english} />
+      <TopBar airingAt={data.airingAt} episode={data.episode} />
+      <Name name={data.media.titles.english} />
     </ImageBackground>
   );
 }

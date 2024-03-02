@@ -1,11 +1,16 @@
 export interface IApiData {
-  id: number;
-  title: ITitles;
-  coverImage: string;
-  episodes: number;
-  siteUrl: string;
-  externalLinks: IExternalLinks[];
-  airingSchedule: IAiringSchedule[];
+  mediaId: number;
+  episode: number;
+  airingAt: Date;
+  media: IMedia;
+}
+
+export interface IMedia {
+  url: string;
+  titles: ITitles;
+  coverImages: ICoverImages;
+  format: string;
+  type: string;
 }
 
 interface ITitles {
@@ -13,12 +18,6 @@ interface ITitles {
   english: string;
 }
 
-export interface IExternalLinks {
-  site: string;
-  url: string;
-}
-
-interface IAiringSchedule {
-  airingAt: string;
-  episode: number;
+interface ICoverImages {
+  extraLarge: string;
 }

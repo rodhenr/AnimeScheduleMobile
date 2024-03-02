@@ -1,9 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 
-function TopBar() {
+type IProps = {
+  airingAt: Date;
+  episode: number;
+};
+
+function TopBar({ airingAt, episode }: IProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Episode 9 - 12:00PM</Text>
+      <Text style={styles.text}>
+        Episode {episode} - {airingAt.toLocaleTimeString()}
+      </Text>
     </View>
   );
 }
