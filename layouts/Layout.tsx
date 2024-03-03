@@ -1,23 +1,40 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import ThemeButton from "../components/ThemeButton";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTheme } from "../context/ThemeContext";
+import { StatusBar } from "expo-status-bar";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const Layout = ({ children }: Props) => {
+  const { isDarkTheme, toggleTheme, colors } = useTheme();
+
   return (
-    <ScrollView style={styles.root}>
+    <ScrollView style={[styles.root, { backgroundColor: colors.background }]}>
+      <StatusBar
+        style={isDarkTheme ? "light" : "dark"}
+        backgroundColor={colors.background}
+      />
       <View>
         <View style={styles.titleContainer}>
-          <Text style={{ color: "white", fontSize: 20 }}>ANIME SCHEDULE</Text>
-          <MaterialCommunityIcons
-            name="moon-waning-crescent"
-            size={20}
-            color="white"
-          />
+          <Text style={{ color: colors.text, fontSize: 20 }}>
+            ANIME SCHEDULE
+          </Text>
+          <TouchableOpacity onPress={toggleTheme}>
+            <MaterialCommunityIcons
+              name={isDarkTheme ? "moon-waning-crescent" : "weather-sunny"}
+              size={20}
+              color={colors.text}
+            />
+          </TouchableOpacity>
         </View>
         <View>{children}</View>
         <View style={styles.footer}>
@@ -30,7 +47,6 @@ const Layout = ({ children }: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: "#4b4b4b",
     flex: 1,
   },
   container: {

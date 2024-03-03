@@ -36,3 +36,9 @@ export enum dateActionType {
   Increment,
   Decrement,
 }
+
+export interface IColors {
+  text: string;
+  background: string;
+  backgroundSecondary: string;
+}

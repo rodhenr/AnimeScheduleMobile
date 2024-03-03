@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getUserCurrentDate, getDayOfTheWeek } from "../utils/dateUtils";
 import { dateActionType } from "../interfaces/interfaces";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTheme } from "../context/ThemeContext";
 
 type Props = {
   updateDate: (type: dateActionType) => void;
@@ -9,22 +10,33 @@ type Props = {
 };
 
 function CurrentTime({ date, updateDate }: Props) {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: colors.backgroundSecondary },
+      ]}
+    >
       <TouchableOpacity onPress={() => updateDate(dateActionType.Decrement)}>
-        <MaterialCommunityIcons name="chevron-left" size={32} color="#e6e6e6" />
+        <MaterialCommunityIcons
+          name="chevron-left"
+          size={32}
+          color={colors.text}
+        />
       </TouchableOpacity>
       <View style={styles.dateContainer}>
-        <Text style={[styles.dateRoot, styles.dateFont]}>
+        <Text style={[styles.dateFont, { color: colors.text }]}>
           {date.toLocaleDateString()}
         </Text>
-        <Text style={styles.dateRoot}>{getDayOfTheWeek(date)}</Text>
+        <Text style={{ color: colors.text }}>{getDayOfTheWeek(date)}</Text>
       </View>
       <TouchableOpacity onPress={() => updateDate(dateActionType.Increment)}>
         <MaterialCommunityIcons
           name="chevron-right"
           size={32}
-          color="#e6e6e6"
+          color={colors.text}
         />
       </TouchableOpacity>
     </View>
@@ -34,8 +46,7 @@ function CurrentTime({ date, updateDate }: Props) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "#6a6a6a",
-    borderRadius: 10,
+    borderRadius: 8,
     flexDirection: "row",
     gap: 32,
     justifyContent: "space-between",
@@ -46,9 +57,6 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     alignItems: "center",
-  },
-  dateRoot: {
-    color: "#e6e6e6",
   },
   dateFont: {
     fontSize: 16,

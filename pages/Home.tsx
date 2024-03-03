@@ -1,16 +1,16 @@
 import { StyleSheet, View, Text } from "react-native";
-import { fakeData } from "../data/fakeData";
 import AnimeCard from "../components/AnimeCard/Index";
 import CurrentTime from "../components/CurrentTime";
 import { useGetDailySchedulesQuery } from "../api/queries/ScheduleQueries";
 import { useEffect, useState } from "react";
 import { incrementOrDecrementDate } from "../utils/dateUtils";
 import { dateActionType } from "../interfaces/interfaces";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Filter from "../components/Filter";
+import FilterModal from "../components/FilterModal";
 
 function Home() {
   const [date, setDate] = useState<Date>(new Date("2024-03-02"));
-  console.log(date);
+  const [openFilterModal, setOpenFilterModal] = useState(false);
 
   useEffect(() => {
     setDate(new Date());
@@ -24,12 +24,14 @@ function Home() {
     setDate(newDate);
   };
 
+  const changeFilterModalState = () => {
+    setOpenFilterModal((op) => !op);
+  };
+
   return (
     <View style={styles.innerContainer}>
-      <View style={styles.filterContainer}>
-        <MaterialCommunityIcons name="cog" size={24} color="black" />
-        <Text>Filter</Text>
-      </View>
+      <Filter onClick={changeFilterModalState} />
+      {openFilterModal && <FilterModal onClick={changeFilterModalState} />}
       <CurrentTime date={date!} updateDate={updateDate} />
       {isPending ? (
         <Text>Pending...</Text>
@@ -61,17 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 8,
   },
-  filterContainer: {
-    alignSelf: "flex-end",
-    alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: 4,
-    flexDirection: "row",
-    gap: 4,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-  },
-  filterText: {},
 });
 
 export default Home;
