@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@react-native-async-storage/async-storage": "^1.22.3",
     "@tanstack/react-query": "^5.24.6",
     "axios": "^1.6.7",
     "expo": "~50.0.8",

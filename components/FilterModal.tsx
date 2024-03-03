@@ -13,89 +13,17 @@ import { IModalData } from "../interfaces/interfaces";
 
 type Props = {
   onClick: () => void;
-};
-
-const defaultModalOptions: IModalData[] = [
-  {
-    name: "Country",
-    options: [
-      { option: "JP", isSelected: true },
-      { option: "CN", isSelected: true },
-      { option: "KR", isSelected: true },
-      { option: "EN", isSelected: true },
-    ],
-    allowMultipleSelection: true,
-  },
-  {
-    name: "Format",
-    options: [
-      { option: "ANIME", isSelected: true },
-      { option: "MOVIE", isSelected: true },
-    ],
-    allowMultipleSelection: true,
-  },
-  {
-    name: "Media Type",
-    options: [
-      { option: "TV", isSelected: true },
-      { option: "TV SHORT", isSelected: true },
-      { option: "ONA", isSelected: true },
-      { option: "OVA", isSelected: true },
-      { option: "SPECIAL", isSelected: true },
-      { option: "MOVIE", isSelected: true },
-    ],
-    allowMultipleSelection: true,
-  },
-  {
-    name: "Sort By",
-    options: [
-      { option: "Date", isSelected: true },
-      { option: "Episode", isSelected: false },
-    ],
-    allowMultipleSelection: false,
-  },
-];
-
-const FilterModal = ({ onClick }: Props) => {
-  const [modalOptions, setModalOptions] =
-    useState<IModalData[]>(defaultModalOptions);
-
-  const { colors } = useTheme();
-
-  const updateOption = (
+  options: IModalData[];
+  updateOption: (
     categoryName: string,
     optionName: string,
     allowMultipleSelection: boolean,
     isSelected: boolean
-  ) => {
-    setModalOptions((prevOptions) => {
-      return prevOptions.map((category) => {
-        if (category.name === categoryName) {
-          return {
-            ...category,
-            options: category.options.map((option) => {
-              if (option.option === optionName) {
-                return {
-                  ...option,
-                  isSelected:
-                    (!allowMultipleSelection && !isSelected) ||
-                    allowMultipleSelection
-                      ? !isSelected
-                      : option.isSelected,
-                };
-              } else if (!allowMultipleSelection) {
-                return { ...option, isSelected: false };
-              }
+  ) => void;
+};
 
-              return option;
-            }),
-          };
-        }
-
-        return category;
-      });
-    });
-  };
+const FilterModal = ({ options, updateOption, onClick }: Props) => {
+  const { colors } = useTheme();
 
   return (
     <Modal style={styles.root}>
@@ -118,7 +46,7 @@ const FilterModal = ({ onClick }: Props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.modalDataContainer}>
-            {modalOptions.map((opt) => (
+            {options.map((opt) => (
               <View style={{ gap: 8 }}>
                 <Text style={{ color: colors.text }}>{opt.name}</Text>
                 <View style={styles.modalOptionsContainer}>
