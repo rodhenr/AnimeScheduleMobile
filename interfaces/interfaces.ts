@@ -1,14 +1,14 @@
 export interface IApiData {
   mediaId: number;
   episode: number;
-  airingAt: Date;
+  airingAt: string;
   media: IMedia;
 }
 
 export interface IMedia {
   url: string;
-  titles: ITitles;
-  coverImages: ICoverImages;
+  title: ITitles;
+  coverImage: ICoverImages;
   format: string;
   type: string;
 }

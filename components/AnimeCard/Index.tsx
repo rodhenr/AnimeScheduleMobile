@@ -1,7 +1,6 @@
 import { ImageBackground, StyleSheet } from "react-native";
 import TopBar from "./TopBar";
 import Name from "./Name";
-import Sources from "./Sources";
 import { IApiData } from "../../interfaces/interfaces";
 
 type Props = {
@@ -12,13 +11,13 @@ function Index({ data }: Props) {
   return (
     <ImageBackground
       source={{
-        uri: data.media.coverImages.extraLarge,
+        uri: data.media.coverImage.extraLarge,
       }}
       alt="animeImage"
       style={styles.container}
     >
-      <TopBar airingAt={data.airingAt} episode={data.episode} />
-      <Name name={data.media.titles.english} />
+      <TopBar airingAt={new Date(data.airingAt)} episode={data.episode} />
+      <Name name={data.media.title.english} />
     </ImageBackground>
   );
 }
