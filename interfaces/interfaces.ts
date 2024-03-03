@@ -42,3 +42,14 @@ export interface IColors {
   background: string;
   backgroundSecondary: string;
 }
+
+export interface IModalData {
+  name: string;
+  options: IModalOption[];
+  allowMultipleSelection: boolean;
+}
+
+interface IModalOption {
+  option: string;
+  isSelected: boolean;
+}
