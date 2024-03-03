@@ -31,3 +31,8 @@ export enum DaysOfWeek {
   Friday = 5,
   Saturday = 6,
 }
+
+export enum dateActionType {
+  Increment,
+  Decrement,
+}

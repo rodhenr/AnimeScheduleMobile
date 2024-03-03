@@ -17,7 +17,10 @@ function Index({ data }: Props) {
       style={styles.container}
     >
       <TopBar airingAt={new Date(data.airingAt)} episode={data.episode} />
-      <Name name={data.media.title.english} />
+      <Name
+        englishName={data.media.title.english}
+        romajiName={data.media.title.romaji}
+      />
     </ImageBackground>
   );
 }

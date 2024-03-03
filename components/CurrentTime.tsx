@@ -1,17 +1,32 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getUserCurrentDate, getDayOfTheWeek } from "../utils/dateUtils";
+import { dateActionType } from "../interfaces/interfaces";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function CurrentTime() {
-  const date = getUserCurrentDate();
+type Props = {
+  updateDate: (type: dateActionType) => void;
+  date: Date;
+};
 
+function CurrentTime({ date, updateDate }: Props) {
   return (
     <View style={styles.container}>
-      <Text>{`<`}</Text>
+      <TouchableOpacity onPress={() => updateDate(dateActionType.Decrement)}>
+        <MaterialCommunityIcons name="chevron-left" size={32} color="#e6e6e6" />
+      </TouchableOpacity>
       <View style={styles.dateContainer}>
-        <Text>{date.toLocaleDateString()}</Text>
-        <Text>{getDayOfTheWeek(date)}</Text>
+        <Text style={[styles.dateRoot, styles.dateFont]}>
+          {date.toLocaleDateString()}
+        </Text>
+        <Text style={styles.dateRoot}>{getDayOfTheWeek(date)}</Text>
       </View>
-      <Text>{`>`}</Text>
+      <TouchableOpacity onPress={() => updateDate(dateActionType.Increment)}>
+        <MaterialCommunityIcons
+          name="chevron-right"
+          size={32}
+          color="#e6e6e6"
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -19,14 +34,24 @@ function CurrentTime() {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    backgroundColor: "#6a6a6a",
+    borderRadius: 10,
     flexDirection: "row",
-    gap: 16,
+    gap: 32,
     justifyContent: "space-between",
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 8,
   },
   dateContainer: {
     alignItems: "center",
-    backgroundColor: "#FFF",
-    padding: 8,
+  },
+  dateRoot: {
+    color: "#e6e6e6",
+  },
+  dateFont: {
+    fontSize: 16,
   },
 });
 

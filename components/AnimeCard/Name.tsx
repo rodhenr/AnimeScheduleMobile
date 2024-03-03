@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 
 type Props = {
-  name: string;
+  englishName: string;
+  romajiName: string;
 };
 
-function Name({ name }: Props) {
+function Name({ englishName, romajiName }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{name}</Text>
+      <Text style={styles.text}>{englishName ?? romajiName}</Text>
     </View>
   );
 }
