@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Define a type for the hook's return value
 type UseAsyncStorageResult<T> = [T, (value: T) => void, boolean];
 
-// Create a generic hook for any type of data
 const useAsyncStorage = <T,>(
   key: string,
   initialValue: T
@@ -16,6 +14,7 @@ const useAsyncStorage = <T,>(
     const loadData = async () => {
       try {
         const value = await AsyncStorage.getItem(key);
+
         if (value !== null) {
           setData(JSON.parse(value));
         }
@@ -32,7 +31,9 @@ const useAsyncStorage = <T,>(
   const setAsyncStorage = async (newValue: T) => {
     try {
       const value = JSON.stringify(newValue);
+
       await AsyncStorage.setItem(key, value);
+      
       setData(newValue);
     } catch (error) {
       console.error(error);

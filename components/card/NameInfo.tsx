@@ -5,14 +5,6 @@ type Props = {
   romajiName: string;
 };
 
-function Name({ englishName, romajiName }: Props) {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{englishName ?? romajiName}</Text>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -26,4 +18,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Name;
+export const NameInfo = ({ englishName, romajiName }: Props) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>{englishName ?? romajiName}</Text>
+    </View>
+  );
+};

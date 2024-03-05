@@ -3,7 +3,6 @@ import { AxiosClient } from "../../common/axios";
 import { IApiData } from "../../interfaces/interfaces";
 
 export const useGetDailySchedulesQuery = (date: Date) => {
-  console.log("querying...");
   const axios = AxiosClient();
 
   return useQuery({

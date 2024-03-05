@@ -1,20 +1,40 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useTheme } from "../context/ThemeContext";
 import { StatusBar } from "expo-status-bar";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useTheme } from "../context/ThemeContext";
 
 type Props = {
   children: React.ReactNode;
 };
 
-const Layout = ({ children }: Props) => {
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+  },
+  titleContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 50,
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  footer: {
+    alignItems: "center",
+    padding: 16,
+  },
+});
+
+export const Layout = ({ children }: Props) => {
   const { isDarkTheme, toggleTheme, colors } = useTheme();
 
   return (
@@ -44,26 +64,3 @@ const Layout = ({ children }: Props) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
-  titleContainer: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    height: 50,
-    paddingLeft: 16,
-    paddingRight: 16,
-  },
-  footer: {
-    alignItems: "center",
-    padding: 16,
-  },
-});
-
-export default Layout;

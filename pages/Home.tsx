@@ -1,13 +1,13 @@
-import { StyleSheet, View, Text } from "react-native";
-import AnimeCard from "../components/AnimeCard/Index";
-import CurrentTime from "../components/CurrentTime";
-import { useGetDailySchedulesQuery } from "../api/queries/ScheduleQueries";
 import { useEffect, useState } from "react";
-import { incrementOrDecrementDate } from "../utils/dateUtils";
-import { IModalData, dateActionType } from "../interfaces/interfaces";
-import Filter from "../components/Filter";
-import FilterModal from "../components/FilterModal";
+import { StyleSheet, Text, View } from "react-native";
+import { useGetDailySchedulesQuery } from "../api/queries/ScheduleQueries";
+import { AnimeCard } from "../components/card/Index";
+import { DateSelector } from "../components/dateSelector/Index";
+import { Filter } from "../components/filter/Index";
+import { FilterModal } from "../components/filter/modal/Index";
 import useAsyncStorage from "../hooks/CustomHooks";
+import { IModalData, dateActionType } from "../interfaces/interfaces";
+import { incrementOrDecrementDate } from "../utils/dateUtils";
 
 const defaultModalOptions: IModalData[] = [
   {
@@ -50,23 +50,29 @@ const defaultModalOptions: IModalData[] = [
   },
 ];
 
-function Home() {
+const styles = StyleSheet.create({
+  innerContainer: {
+    alignItems: "center",
+    gap: 16,
+    padding: 16,
+  },
+  cardsContainer: {
+    alignItems: "center",
+    flex: 1,
+    gap: 8,
+  },
+});
+
+export const Home = () => {
   const [storageFilterModalOptions, setStorageFilterModalOptions, loading] =
     useAsyncStorage<IModalData[]>("filterModalOptions", defaultModalOptions);
 
-  const [filterModalOptions, setFilterModalOptions] = useState<IModalData[]>(
-    []
-  );
   const [date, setDate] = useState<Date>(new Date("2024-03-02"));
   const [openFilterModal, setOpenFilterModal] = useState(false);
 
   useEffect(() => {
     setDate(new Date());
   }, []);
-
-  useEffect(() => {
-    setFilterModalOptions(storageFilterModalOptions);
-  }, [storageFilterModalOptions]);
 
   const { data, error, isPending } = useGetDailySchedulesQuery(date!);
 
@@ -80,15 +86,14 @@ function Home() {
     setOpenFilterModal((op) => !op);
   };
 
-  // TODO: Refactor this method - it was not implemented correctly
   const updateOption = (
     categoryName: string,
     optionName: string,
     allowMultipleSelection: boolean,
     isSelected: boolean
   ) => {
-    setFilterModalOptions((prevOptions) => {
-      return prevOptions.map((category) => {
+    setStorageFilterModalOptions(
+      storageFilterModalOptions.map((category) => {
         if (category.name === categoryName) {
           return {
             ...category,
@@ -112,10 +117,8 @@ function Home() {
         }
 
         return category;
-      });
-    });
-
-    setStorageFilterModalOptions(filterModalOptions);
+      })
+    );
   };
 
   return (
@@ -123,12 +126,12 @@ function Home() {
       <Filter onClick={changeFilterModalState} />
       {openFilterModal && (
         <FilterModal
-          options={filterModalOptions}
+          options={storageFilterModalOptions}
           updateOption={updateOption}
           onClick={changeFilterModalState}
         />
       )}
-      <CurrentTime date={date!} updateDate={updateDate} />
+      <DateSelector date={date!} updateDate={updateDate} />
       {isPending ? (
         <Text>Pending...</Text>
       ) : error ? (
@@ -146,19 +149,4 @@ function Home() {
       )}
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  innerContainer: {
-    alignItems: "center",
-    gap: 16,
-    padding: 16,
-  },
-  cardsContainer: {
-    alignItems: "center",
-    flex: 1,
-    gap: 8,
-  },
-});
-
-export default Home;
+};

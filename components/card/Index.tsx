@@ -1,29 +1,11 @@
 import { ImageBackground, StyleSheet } from "react-native";
-import TopBar from "./TopBar";
-import Name from "./Name";
 import { IApiData } from "../../interfaces/interfaces";
+import { EpisodeInfo } from "./EpisodeInfo";
+import { NameInfo } from "./NameInfo";
 
 type Props = {
   data: IApiData;
 };
-
-function Index({ data }: Props) {
-  return (
-    <ImageBackground
-      source={{
-        uri: data.media.coverImage.extraLarge,
-      }}
-      alt="animeImage"
-      style={styles.container}
-    >
-      <TopBar airingAt={new Date(data.airingAt)} episode={data.episode} />
-      <Name
-        englishName={data.media.title.english}
-        romajiName={data.media.title.romaji}
-      />
-    </ImageBackground>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -33,4 +15,20 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Index;
+export const AnimeCard = ({ data }: Props) => {
+  return (
+    <ImageBackground
+      source={{
+        uri: data.media.coverImage.extraLarge,
+      }}
+      alt="animeImage"
+      style={styles.container}
+    >
+      <EpisodeInfo airingAt={new Date(data.airingAt)} episode={data.episode} />
+      <NameInfo
+        englishName={data.media.title.english}
+        romajiName={data.media.title.romaji}
+      />
+    </ImageBackground>
+  );
+};

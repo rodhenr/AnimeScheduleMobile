@@ -1,10 +1,16 @@
+import { QueryClientProvider } from "@tanstack/react-query";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView as SafeAreaViewAndroid } from "react-native-safe-area-context";
-import Home from "./pages/Home";
-import Layout from "./layouts/Layout";
 import { queryClient } from "./common/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./context/ThemeContext";
+import { Layout } from "./layouts/Layout";
+import { Home } from "./pages/Home";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default function App() {
   return (
@@ -21,9 +27,3 @@ export default function App() {
     </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

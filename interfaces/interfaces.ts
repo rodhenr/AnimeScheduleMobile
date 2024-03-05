@@ -41,6 +41,7 @@ export interface IColors {
   text: string;
   background: string;
   backgroundSecondary: string;
+  backgroundCard: string;
 }
 
 export interface IModalData {
@@ -49,7 +50,7 @@ export interface IModalData {
   allowMultipleSelection: boolean;
 }
 
-interface IModalOption {
+export interface IModalOption {
   option: string;
   isSelected: boolean;
 }
