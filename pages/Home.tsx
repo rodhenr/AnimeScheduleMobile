@@ -6,7 +6,7 @@ import { DateSelector } from "../components/dateSelector/Index";
 import { Filter } from "../components/filter/Index";
 import { FilterModal } from "../components/filter/modal/Index";
 import useAsyncStorage from "../hooks/CustomHooks";
-import { IModalData, dateActionType } from "../interfaces/interfaces";
+import { IApiData, IModalData, dateActionType } from "../interfaces/interfaces";
 import { incrementOrDecrementDate } from "../utils/dateUtils";
 
 const defaultModalOptions: IModalData[] = [
@@ -67,19 +67,21 @@ export const Home = () => {
   const [storageFilterModalOptions, setStorageFilterModalOptions, loading] =
     useAsyncStorage<IModalData[]>("filterModalOptions", defaultModalOptions);
 
-  const [date, setDate] = useState<Date>(new Date("2024-03-02"));
+  const [date, setDate] = useState<Date | null>(null);
   const [openFilterModal, setOpenFilterModal] = useState(false);
 
   useEffect(() => {
     setDate(new Date());
   }, []);
 
-  const { data, error, isPending } = useGetDailySchedulesQuery(date!);
+  const { data, error, isPending } = useGetDailySchedulesQuery(date);
 
   const updateDate = (type: dateActionType): void => {
-    const newDate = incrementOrDecrementDate(date, type);
+    if (date !== null) {
+      const newDate = incrementOrDecrementDate(date, type);
 
-    setDate(newDate);
+      setDate(newDate);
+    }
   };
 
   const changeFilterModalState = () => {
@@ -121,6 +123,51 @@ export const Home = () => {
     );
   };
 
+  const getSelectedOptions = (
+    optionName: string,
+    options: IModalData[]
+  ): string[] => {
+    var filteredOptions = options.find((o) => o.name === optionName);
+
+    return filteredOptions
+      ? filteredOptions.options.filter((o) => o.isSelected).map((o) => o.option)
+      : [];
+  };
+
+  const filterAndSortData = (): IApiData[] => {
+    const countries = getSelectedOptions("Country", storageFilterModalOptions);
+    const formats = getSelectedOptions("Format", storageFilterModalOptions);
+    const mediaTypes = getSelectedOptions(
+      "Media Type",
+      storageFilterModalOptions
+    );
+    const sortBy = getSelectedOptions("Sort By", storageFilterModalOptions);
+
+    if (data) {
+      let filteredData = data.filter(
+        (d) =>
+          countries.includes(d.media.country) &&
+          formats.includes(d.media.format) &&
+          mediaTypes.includes(d.media.type)
+      );
+
+      console.log(countries);
+
+      if (sortBy.includes("Date")) {
+        filteredData.sort(
+          (a, b) =>
+            new Date(a.airingAt).getTime() - new Date(b.airingAt).getTime()
+        );
+      } else {
+        filteredData.sort((a, b) => a.episode - b.episode);
+      }
+
+      return filteredData;
+    }
+
+    return [];
+  };
+
   return (
     <View style={styles.innerContainer}>
       <Filter onClick={changeFilterModalState} />
@@ -131,14 +178,14 @@ export const Home = () => {
           onClick={changeFilterModalState}
         />
       )}
-      <DateSelector date={date!} updateDate={updateDate} />
+      {date && <DateSelector date={date!} updateDate={updateDate} />}
       {isPending ? (
         <Text>Pending...</Text>
       ) : error ? (
         <Text>Error...</Text>
       ) : data ? (
         <View style={styles.cardsContainer}>
-          {data.map((i) => (
+          {filterAndSortData().map((i) => (
             <AnimeCard data={i} key={i.mediaId} />
           ))}
         </View>

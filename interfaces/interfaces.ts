@@ -8,6 +8,7 @@ export interface IApiData {
 export interface IMedia {
   url: string;
   title: ITitles;
+  country: string;
   coverImage: ICoverImages;
   format: string;
   type: string;

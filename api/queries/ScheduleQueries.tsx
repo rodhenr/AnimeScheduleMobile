@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosClient } from "../../common/axios";
 import { IApiData } from "../../interfaces/interfaces";
 
-export const useGetDailySchedulesQuery = (date: Date) => {
+export const useGetDailySchedulesQuery = (date: Date | null) => {
   const axios = AxiosClient();
 
   return useQuery({
@@ -10,8 +10,9 @@ export const useGetDailySchedulesQuery = (date: Date) => {
     queryFn: () =>
       axios
         .get<IApiData[]>(
-          `/getSchedules?date=${date.toLocaleDateString()}&searchType=Daily`
+          `/getSchedules?date=${date?.toLocaleDateString()}&searchType=Daily`
         )
         .then((res) => res.data),
+    enabled: !!date,
   });
 };
