@@ -10,6 +10,8 @@ const useAsyncStorage = <T,>(
   const [data, setData] = useState<T>(initialValue);
   const [loading, setLoading] = useState<boolean>(true);
 
+  //AsyncStorage.clear();
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -33,7 +35,7 @@ const useAsyncStorage = <T,>(
       const value = JSON.stringify(newValue);
 
       await AsyncStorage.setItem(key, value);
-      
+
       setData(newValue);
     } catch (error) {
       console.error(error);

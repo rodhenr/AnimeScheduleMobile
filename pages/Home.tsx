@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useMemo, useState } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { useGetDailySchedulesQuery } from "../api/queries/ScheduleQueries";
 import { AnimeCard } from "../components/card/Index";
 import { DateSelector } from "../components/dateSelector/Index";
@@ -8,6 +8,7 @@ import { FilterModal } from "../components/filter/modal/Index";
 import useAsyncStorage from "../hooks/CustomHooks";
 import { IApiData, IModalData, dateActionType } from "../interfaces/interfaces";
 import { incrementOrDecrementDate } from "../utils/dateUtils";
+import { useTheme } from "../context/ThemeContext";
 
 const defaultModalOptions: IModalData[] = [
   {
@@ -16,14 +17,18 @@ const defaultModalOptions: IModalData[] = [
       { option: "JP", isSelected: true },
       { option: "CN", isSelected: true },
       { option: "KR", isSelected: true },
-      { option: "EN", isSelected: true },
+      { option: "US", isSelected: true },
     ],
     allowMultipleSelection: true,
   },
   {
     name: "Format",
     options: [
-      { option: "ANIME", isSelected: true },
+      { option: "TV", isSelected: true },
+      { option: "TV SHORT", isSelected: true },
+      { option: "ONA", isSelected: true },
+      { option: "OVA", isSelected: true },
+      { option: "SPECIAL", isSelected: true },
       { option: "MOVIE", isSelected: true },
     ],
     allowMultipleSelection: true,
@@ -31,11 +36,7 @@ const defaultModalOptions: IModalData[] = [
   {
     name: "Media Type",
     options: [
-      { option: "TV", isSelected: true },
-      { option: "TV SHORT", isSelected: true },
-      { option: "ONA", isSelected: true },
-      { option: "OVA", isSelected: true },
-      { option: "SPECIAL", isSelected: true },
+      { option: "ANIME", isSelected: true },
       { option: "MOVIE", isSelected: true },
     ],
     allowMultipleSelection: true,
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
 });
 
 export const Home = () => {
+  const { colors } = useTheme();
   const [storageFilterModalOptions, setStorageFilterModalOptions, loading] =
     useAsyncStorage<IModalData[]>("filterModalOptions", defaultModalOptions);
 
@@ -134,7 +136,7 @@ export const Home = () => {
       : [];
   };
 
-  const filterAndSortData = (): IApiData[] => {
+  const filterAndSortData: IApiData[] = useMemo(() => {
     const countries = getSelectedOptions("Country", storageFilterModalOptions);
     const formats = getSelectedOptions("Format", storageFilterModalOptions);
     const mediaTypes = getSelectedOptions(
@@ -144,14 +146,13 @@ export const Home = () => {
     const sortBy = getSelectedOptions("Sort By", storageFilterModalOptions);
 
     if (data) {
-      let filteredData = data.filter(
-        (d) =>
-          countries.includes(d.media.country) &&
+      let filteredData = data.filter((d) => {
+        return (
+          countries.includes(d.media.countryOfOrigin) &&
           formats.includes(d.media.format) &&
           mediaTypes.includes(d.media.type)
-      );
-
-      console.log(countries);
+        );
+      });
 
       if (sortBy.includes("Date")) {
         filteredData.sort(
@@ -166,7 +167,7 @@ export const Home = () => {
     }
 
     return [];
-  };
+  }, [storageFilterModalOptions, data]);
 
   return (
     <View style={styles.innerContainer}>
@@ -180,19 +181,15 @@ export const Home = () => {
       )}
       {date && <DateSelector date={date!} updateDate={updateDate} />}
       {isPending ? (
-        <Text>Pending...</Text>
-      ) : error ? (
-        <Text>Error...</Text>
+        <ActivityIndicator size="large" color={colors.text} />
       ) : data ? (
         <View style={styles.cardsContainer}>
-          {filterAndSortData().map((i) => (
+          {filterAndSortData.map((i) => (
             <AnimeCard data={i} key={i.mediaId} />
           ))}
         </View>
       ) : (
-        <View>
-          <Text>Unknown...</Text>
-        </View>
+        <Text>Error...</Text>
       )}
     </View>
   );

@@ -6,7 +6,7 @@ export const useGetDailySchedulesQuery = (date: Date | null) => {
   const axios = AxiosClient();
 
   return useQuery({
-    queryKey: ["dailySchedules", date, "daily"],
+    queryKey: ["dailySchedules", date?.toDateString(), "daily"],
     queryFn: () =>
       axios
         .get<IApiData[]>(
