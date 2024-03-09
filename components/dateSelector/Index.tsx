@@ -1,5 +1,4 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import { dateActionType } from "../../interfaces/interfaces";
 import { DateInfo } from "./DateInfo";

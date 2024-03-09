@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView as SafeAreaViewAndroid } from "react-native-safe-area-context";
 import { useTheme } from "../context/ThemeContext";
 
 type Props = {
@@ -38,29 +39,35 @@ export const Layout = ({ children }: Props) => {
   const { isDarkTheme, toggleTheme, colors } = useTheme();
 
   return (
-    <ScrollView style={[styles.root, { backgroundColor: colors.background }]}>
-      <StatusBar
-        style={isDarkTheme ? "light" : "dark"}
-        backgroundColor={colors.background}
-      />
-      <View>
-        <View style={styles.titleContainer}>
-          <Text style={{ color: colors.text, fontSize: 20 }}>
-            ANIME SCHEDULE
-          </Text>
-          <TouchableOpacity onPress={toggleTheme}>
-            <MaterialCommunityIcons
-              name={isDarkTheme ? "moon-waning-crescent" : "weather-sunny"}
-              size={20}
-              color={colors.text}
-            />
-          </TouchableOpacity>
-        </View>
-        <View>{children}</View>
-        <View style={styles.footer}>
-          <Text></Text>
-        </View>
+    <SafeAreaViewAndroid style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <ScrollView
+          style={[styles.root, { backgroundColor: colors.background }]}
+        >
+          <StatusBar
+            style={isDarkTheme ? "light" : "dark"}
+            backgroundColor={colors.background}
+          />
+          <View>
+            <View style={styles.titleContainer}>
+              <Text style={{ color: colors.text, fontSize: 20 }}>
+                ANIME SCHEDULE
+              </Text>
+              <TouchableOpacity onPress={toggleTheme}>
+                <MaterialCommunityIcons
+                  name={isDarkTheme ? "moon-waning-crescent" : "weather-sunny"}
+                  size={20}
+                  color={colors.text}
+                />
+              </TouchableOpacity>
+            </View>
+            <View>{children}</View>
+            <View style={styles.footer}>
+              <Text></Text>
+            </View>
+          </View>
+        </ScrollView>
       </View>
-    </ScrollView>
+    </SafeAreaViewAndroid>
   );
 };

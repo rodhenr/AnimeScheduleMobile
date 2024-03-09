@@ -1,7 +1,9 @@
-import { ImageBackground, StyleSheet } from "react-native";
-import { IApiData } from "../../interfaces/interfaces";
+import { ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
+import { IApiData, RootStackParamList } from "../../interfaces/interfaces";
 import { EpisodeInfo } from "./EpisodeInfo";
 import { NameInfo } from "./NameInfo";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 type Props = {
   data: IApiData;
@@ -15,20 +17,31 @@ const styles = StyleSheet.create({
   },
 });
 
+type AnimeCardNavigationProp = StackNavigationProp<RootStackParamList, "Anime">;
+
 export const AnimeCard = ({ data }: Props) => {
+  const navigation = useNavigation<AnimeCardNavigationProp>();
+
   return (
-    <ImageBackground
-      source={{
-        uri: data.media.coverImage.extraLarge,
-      }}
-      alt="animeImage"
-      style={styles.container}
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Anime", { id: data.mediaId })}
     >
-      <EpisodeInfo airingAt={new Date(data.airingAt)} episode={data.episode} />
-      <NameInfo
-        englishName={data.media.title.english}
-        romajiName={data.media.title.romaji}
-      />
-    </ImageBackground>
+      <ImageBackground
+        source={{
+          uri: data.media.coverImage,
+        }}
+        alt="animeImage"
+        style={styles.container}
+      >
+        <EpisodeInfo
+          airingAt={new Date(data.airingAt)}
+          episode={data.episode}
+        />
+        <NameInfo
+          englishName={data.media.title.english}
+          romajiName={data.media.title.romaji}
+        />
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };

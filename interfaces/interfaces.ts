@@ -6,21 +6,17 @@ export interface IApiData {
 }
 
 export interface IMedia {
-  url: string;
+  siteUrl: string;
   title: ITitles;
-  countryOfOrigin: string;
-  coverImage: ICoverImages;
+  coverImage: string;
   format: string;
   type: string;
+  countryOfOrigin: string;
 }
 
 interface ITitles {
   romaji: string;
   english: string;
-}
-
-interface ICoverImages {
-  extraLarge: string;
 }
 
 export enum DaysOfWeek {
@@ -55,3 +51,8 @@ export interface IModalOption {
   option: string;
   isSelected: boolean;
 }
+
+export type RootStackParamList = {
+  Home: undefined;
+  Anime: { id: number };
+};

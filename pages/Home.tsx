@@ -1,14 +1,26 @@
+import { StackNavigationProp } from "@react-navigation/stack";
 import { useEffect, useMemo, useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useGetDailySchedulesQuery } from "../api/queries/ScheduleQueries";
 import { AnimeCard } from "../components/card/Index";
 import { DateSelector } from "../components/dateSelector/Index";
 import { Filter } from "../components/filter/Index";
 import { FilterModal } from "../components/filter/modal/Index";
-import useAsyncStorage from "../hooks/CustomHooks";
-import { IApiData, IModalData, dateActionType } from "../interfaces/interfaces";
-import { incrementOrDecrementDate } from "../utils/dateUtils";
 import { useTheme } from "../context/ThemeContext";
+import useAsyncStorage from "../hooks/CustomHooks";
+import {
+  IApiData,
+  IModalData,
+  RootStackParamList,
+  dateActionType,
+} from "../interfaces/interfaces";
+import { incrementOrDecrementDate } from "../utils/dateUtils";
 
 const defaultModalOptions: IModalData[] = [
   {
@@ -54,6 +66,7 @@ const defaultModalOptions: IModalData[] = [
 const styles = StyleSheet.create({
   innerContainer: {
     alignItems: "center",
+    flex: 1,
     gap: 16,
     padding: 16,
   },
@@ -64,7 +77,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Home = () => {
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+
+type Props = {
+  navigation: HomeScreenNavigationProp;
+};
+
+export const Home = ({ navigation }: Props) => {
   const { colors } = useTheme();
   const [storageFilterModalOptions, setStorageFilterModalOptions, loading] =
     useAsyncStorage<IModalData[]>("filterModalOptions", defaultModalOptions);
@@ -170,27 +189,29 @@ export const Home = () => {
   }, [storageFilterModalOptions, data]);
 
   return (
-    <View style={styles.innerContainer}>
-      <Filter onClick={changeFilterModalState} />
-      {openFilterModal && (
-        <FilterModal
-          options={storageFilterModalOptions}
-          updateOption={updateOption}
-          onClick={changeFilterModalState}
-        />
-      )}
-      {date && <DateSelector date={date!} updateDate={updateDate} />}
-      {isPending ? (
-        <ActivityIndicator size="large" color={colors.text} />
-      ) : data ? (
-        <View style={styles.cardsContainer}>
-          {filterAndSortData.map((i) => (
-            <AnimeCard data={i} key={i.mediaId} />
-          ))}
-        </View>
-      ) : (
-        <Text>Error...</Text>
-      )}
-    </View>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={styles.innerContainer}>
+        <Filter onClick={changeFilterModalState} />
+        {openFilterModal && (
+          <FilterModal
+            options={storageFilterModalOptions}
+            updateOption={updateOption}
+            onClick={changeFilterModalState}
+          />
+        )}
+        {date && <DateSelector date={date!} updateDate={updateDate} />}
+        {isPending ? (
+          <ActivityIndicator size="large" color={colors.text} />
+        ) : data ? (
+          <View style={styles.cardsContainer}>
+            {filterAndSortData.map((i) => (
+              <AnimeCard data={i} key={i.mediaId} />
+            ))}
+          </View>
+        ) : (
+          <Text>Error...</Text>
+        )}
+      </View>
+    </ScrollView>
   );
 };
