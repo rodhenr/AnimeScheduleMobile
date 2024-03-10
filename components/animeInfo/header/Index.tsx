@@ -11,11 +11,12 @@ const styles = StyleSheet.create({
 
 type Props = {
   cover: string;
-  nextEpisodeInfo: INextEpisode;
+  id: number;
+  nextEpisodeInfo: INextEpisode | null;
   titles: ITitles;
 };
 
-export const Header = ({ cover, nextEpisodeInfo, titles }: Props) => {
+export const Header = ({ cover, id, nextEpisodeInfo, titles }: Props) => {
   return (
     <View style={styles.container}>
       <View>
@@ -23,11 +24,13 @@ export const Header = ({ cover, nextEpisodeInfo, titles }: Props) => {
       </View>
       <View style={styles.innerContainer}>
         <Titles titles={titles} />
-        <NextEpisode
-          airingAt={nextEpisodeInfo.airingAt}
-          episode={nextEpisodeInfo.episode}
-        />
-        <FollowButton />
+        {nextEpisodeInfo && (
+          <NextEpisode
+            airingAt={nextEpisodeInfo.airingAt}
+            episode={nextEpisodeInfo.episode}
+          />
+        )}
+        <FollowButton animeId={id} />
       </View>
     </View>
   );

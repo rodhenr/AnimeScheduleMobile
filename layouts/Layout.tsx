@@ -50,7 +50,7 @@ export const Layout = ({ children }: Props) => {
           />
           <View>
             <View style={styles.titleContainer}>
-              <Text style={{ color: colors.text, fontSize: 20 }}>
+              <Text style={{ color: colors.text, fontSize: 16 }}>
                 ANIME SCHEDULE
               </Text>
               <TouchableOpacity onPress={toggleTheme}>

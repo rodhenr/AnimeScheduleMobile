@@ -1,11 +1,13 @@
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Description } from "./Description";
 import { Details } from "./Details";
 import Genres from "./Genres";
 
+const styles = StyleSheet.create({ container: { gap: 8 } });
+
 type Props = {
   description: string;
-  endDate: string;
+  endDate: string | null;
   episodes: number;
   season: string;
   seasonYear: number;
@@ -29,7 +31,7 @@ export const Information = ({
   type,
 }: Props) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Description description={description} />
       <Details
         endDate={endDate}

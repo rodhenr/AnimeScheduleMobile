@@ -1,13 +1,10 @@
-import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "../../context/ThemeContext";
 import { IAnimeInfo } from "../../interfaces/interfaces";
 import { Information } from "./Information/Index";
 import { Header } from "./header/Index";
 
 const styles = StyleSheet.create({
-  container: { gap: 8, marginHorizontal: 12 },
+  container: { gap: 16 },
 });
 
 type Props = {
@@ -15,19 +12,11 @@ type Props = {
 };
 
 export const AnimeInfo = ({ data }: Props) => {
-  const navigation = useNavigation();
-  const { colors } = useTheme();
-
   return (
     <View style={styles.container}>
-      <Feather
-        name="arrow-left"
-        size={32}
-        onPress={() => navigation.goBack()}
-        color={colors.text}
-      />
       <Header
         cover={data.coverImage}
+        id={data.id}
         nextEpisodeInfo={data.nextAiringEpisode}
         titles={data.title}
       />

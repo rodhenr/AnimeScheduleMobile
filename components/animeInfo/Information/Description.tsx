@@ -4,7 +4,7 @@ import { InfoContainer } from "./infoContainer/Index";
 
 const styles = StyleSheet.create({
   container: { gap: 2 },
-  description: { textAlign: "justify" },
+  description: { fontSize: 12, textAlign: "justify" },
 });
 
 type Props = {

@@ -3,7 +3,8 @@ import { useTheme } from "../../../context/ThemeContext";
 import { InfoContainer } from "./infoContainer/Index";
 
 const styles = StyleSheet.create({
-  container: { flexDirection: "row", gap: 8 },
+  container: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  itemContainer: { borderRadius: 4, paddingHorizontal: 8, paddingVertical: 4 },
 });
 
 type Props = { genres: string[] };
@@ -15,7 +16,14 @@ const Genres = ({ genres }: Props) => {
     <InfoContainer title="Genres">
       <View style={styles.container}>
         {genres.map((g) => (
-          <Text style={{ color: colors.text }}>{g}</Text>
+          <View
+            style={[
+              styles.itemContainer,
+              { backgroundColor: colors.background },
+            ]}
+          >
+            <Text style={{ color: colors.text, fontSize: 12 }}>{g}</Text>
+          </View>
         ))}
       </View>
     </InfoContainer>

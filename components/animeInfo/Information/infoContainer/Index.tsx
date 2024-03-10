@@ -3,7 +3,12 @@ import { useTheme } from "../../../../context/ThemeContext";
 
 const styles = StyleSheet.create({
   container: { gap: 4 },
-  childrenContainer: { paddingHorizontal: 12, paddingVertical: 8 },
+  childrenContainer: {
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+  title: { fontWeight: "bold" },
 });
 
 type Props = {
@@ -16,7 +21,7 @@ export const InfoContainer = ({ children, title }: Props) => {
 
   return (
     <View style={[styles.container]}>
-      <Text style={[{ color: colors.text }]}>{title}</Text>
+      <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
       <View
         style={[
           styles.childrenContainer,

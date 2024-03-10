@@ -39,6 +39,8 @@ export interface IColors {
   background: string;
   backgroundSecondary: string;
   backgroundCard: string;
+  backgroundFollowing: string;
+  backgroundNotFollowing: string;
 }
 
 export interface IModalData {
@@ -74,9 +76,9 @@ export interface IAnimeInfo {
   seasonYear: number;
   episodes: number;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   genres: string[];
-  nextAiringEpisode: INextEpisode;
+  nextAiringEpisode: INextEpisode | null;
 }
 
 export interface INextEpisode {
