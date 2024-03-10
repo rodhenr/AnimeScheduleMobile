@@ -1,7 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ScrollView } from "react-native";
 import { queryClient } from "./common/queryClient";
 import { ThemeProvider } from "./context/ThemeContext";
 import { RootStackParamList } from "./interfaces/interfaces";

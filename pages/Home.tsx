@@ -21,6 +21,7 @@ import {
   dateActionType,
 } from "../interfaces/interfaces";
 import { incrementOrDecrementDate } from "../utils/dateUtils";
+import { Layout } from "../layouts/Layout";
 
 const defaultModalOptions: IModalData[] = [
   {
@@ -189,29 +190,31 @@ export const Home = ({ navigation }: Props) => {
   }, [storageFilterModalOptions, data]);
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={styles.innerContainer}>
-        <Filter onClick={changeFilterModalState} />
-        {openFilterModal && (
-          <FilterModal
-            options={storageFilterModalOptions}
-            updateOption={updateOption}
-            onClick={changeFilterModalState}
-          />
-        )}
-        {date && <DateSelector date={date!} updateDate={updateDate} />}
-        {isPending ? (
-          <ActivityIndicator size="large" color={colors.text} />
-        ) : data ? (
-          <View style={styles.cardsContainer}>
-            {filterAndSortData.map((i) => (
-              <AnimeCard data={i} key={i.mediaId} />
-            ))}
-          </View>
-        ) : (
-          <Text>Error...</Text>
-        )}
-      </View>
-    </ScrollView>
+    <Layout>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.innerContainer}>
+          <Filter onClick={changeFilterModalState} />
+          {openFilterModal && (
+            <FilterModal
+              options={storageFilterModalOptions}
+              updateOption={updateOption}
+              onClick={changeFilterModalState}
+            />
+          )}
+          {date && <DateSelector date={date!} updateDate={updateDate} />}
+          {isPending ? (
+            <ActivityIndicator size="large" color={colors.text} />
+          ) : data ? (
+            <View style={styles.cardsContainer}>
+              {filterAndSortData.map((i) => (
+                <AnimeCard data={i} key={i.mediaId} />
+              ))}
+            </View>
+          ) : (
+            <Text>Error...</Text>
+          )}
+        </View>
+      </ScrollView>
+    </Layout>
   );
 };

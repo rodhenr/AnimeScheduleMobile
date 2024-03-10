@@ -14,7 +14,7 @@ export interface IMedia {
   countryOfOrigin: string;
 }
 
-interface ITitles {
+export interface ITitles {
   romaji: string;
   english: string;
 }
@@ -56,3 +56,30 @@ export type RootStackParamList = {
   Home: undefined;
   Anime: { id: number };
 };
+
+export interface IAnimeInfo {
+  id: number;
+  idMal: number;
+  source: string;
+  siteUrl: string;
+  title: ITitles;
+  coverImage: string;
+  format: string;
+  type: string;
+  countryOfOrigin: string;
+  status: string;
+  description: string;
+  averageScore: number;
+  season: string;
+  seasonYear: number;
+  episodes: number;
+  startDate: string;
+  endDate: string;
+  genres: string[];
+  nextAiringEpisode: INextEpisode;
+}
+
+export interface INextEpisode {
+  airingAt: string;
+  episode: number;
+}
