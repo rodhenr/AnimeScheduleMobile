@@ -62,6 +62,11 @@ const defaultModalOptions: IModalData[] = [
     ],
     allowMultipleSelection: false,
   },
+  {
+    name: "User Status",
+    options: [{ option: "Watching", isSelected: false }],
+    allowMultipleSelection: true,
+  },
 ];
 
 const styles = StyleSheet.create({
@@ -88,6 +93,9 @@ export const Home = ({ navigation }: Props) => {
   const { colors } = useTheme();
   const [storageFilterModalOptions, setStorageFilterModalOptions, loading] =
     useAsyncStorage<IModalData[]>("filterModalOptions", defaultModalOptions);
+  const [storageFollowedAnimes, setStorageFollowedAnimes] = useAsyncStorage<
+    number[]
+  >("followedAnimes", []);
 
   const [date, setDate] = useState<Date | null>(null);
   const [openFilterModal, setOpenFilterModal] = useState(false);
@@ -164,9 +172,21 @@ export const Home = ({ navigation }: Props) => {
       storageFilterModalOptions
     );
     const sortBy = getSelectedOptions("Sort By", storageFilterModalOptions);
+    const userStatus = getSelectedOptions(
+      "User Status",
+      storageFilterModalOptions
+    );
 
     if (data) {
-      let filteredData = data.filter((d) => {
+      let filteredData = data;
+
+      if (userStatus.includes("Watching")) {
+        filteredData = filteredData.filter((data) =>
+          storageFollowedAnimes.includes(data.mediaId)
+        );
+      }
+
+      filteredData = filteredData.filter((d) => {
         return (
           countries.includes(d.media.countryOfOrigin) &&
           formats.includes(d.media.format) &&
