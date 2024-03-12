@@ -12,6 +12,8 @@ import { AnimeCard } from "../components/card/Index";
 import { DateSelector } from "../components/dateSelector/Index";
 import { Filter } from "../components/filter/Index";
 import { FilterModal } from "../components/filter/modal/Index";
+import { defaultModalOptions } from "../config/defaultData";
+import { useFollowedAnimesContext } from "../context/FollowedAnimesContext";
 import { useTheme } from "../context/ThemeContext";
 import useAsyncStorage from "../hooks/CustomHooks";
 import {
@@ -20,54 +22,8 @@ import {
   RootStackParamList,
   dateActionType,
 } from "../interfaces/interfaces";
-import { incrementOrDecrementDate } from "../utils/dateUtils";
 import { Layout } from "../layouts/Layout";
-
-const defaultModalOptions: IModalData[] = [
-  {
-    name: "Country",
-    options: [
-      { option: "JP", isSelected: true },
-      { option: "CN", isSelected: true },
-      { option: "KR", isSelected: true },
-      { option: "US", isSelected: true },
-    ],
-    allowMultipleSelection: true,
-  },
-  {
-    name: "Format",
-    options: [
-      { option: "TV", isSelected: true },
-      { option: "TV SHORT", isSelected: true },
-      { option: "ONA", isSelected: true },
-      { option: "OVA", isSelected: true },
-      { option: "SPECIAL", isSelected: true },
-      { option: "MOVIE", isSelected: true },
-    ],
-    allowMultipleSelection: true,
-  },
-  {
-    name: "Media Type",
-    options: [
-      { option: "ANIME", isSelected: true },
-      { option: "MOVIE", isSelected: true },
-    ],
-    allowMultipleSelection: true,
-  },
-  {
-    name: "Sort By",
-    options: [
-      { option: "Date", isSelected: true },
-      { option: "Episode", isSelected: false },
-    ],
-    allowMultipleSelection: false,
-  },
-  {
-    name: "User Status",
-    options: [{ option: "Watching", isSelected: false }],
-    allowMultipleSelection: true,
-  },
-];
+import { incrementOrDecrementDate } from "../utils/dateUtils";
 
 const styles = StyleSheet.create({
   innerContainer: {
@@ -91,14 +47,14 @@ type Props = {
 
 export const Home = ({ navigation }: Props) => {
   const { colors } = useTheme();
-  const [storageFilterModalOptions, setStorageFilterModalOptions, loading] =
-    useAsyncStorage<IModalData[]>("filterModalOptions", defaultModalOptions);
-  const [storageFollowedAnimes, setStorageFollowedAnimes] = useAsyncStorage<
-    number[]
-  >("followedAnimes", []);
-
   const [date, setDate] = useState<Date | null>(null);
   const [openFilterModal, setOpenFilterModal] = useState(false);
+  const { data: followedAnimes, loading: loadingFollowedAnimes } =
+    useFollowedAnimesContext<number[]>();
+  const [modalOptions, setModalOptions] = useAsyncStorage<IModalData[]>(
+    "filterModalOptions",
+    defaultModalOptions
+  );
 
   useEffect(() => {
     setDate(new Date());
@@ -124,8 +80,8 @@ export const Home = ({ navigation }: Props) => {
     allowMultipleSelection: boolean,
     isSelected: boolean
   ) => {
-    setStorageFilterModalOptions(
-      storageFilterModalOptions.map((category) => {
+    setModalOptions(
+      modalOptions.map((category) => {
         if (category.name === categoryName) {
           return {
             ...category,
@@ -165,24 +121,18 @@ export const Home = ({ navigation }: Props) => {
   };
 
   const filterAndSortData: IApiData[] = useMemo(() => {
-    const countries = getSelectedOptions("Country", storageFilterModalOptions);
-    const formats = getSelectedOptions("Format", storageFilterModalOptions);
-    const mediaTypes = getSelectedOptions(
-      "Media Type",
-      storageFilterModalOptions
-    );
-    const sortBy = getSelectedOptions("Sort By", storageFilterModalOptions);
-    const userStatus = getSelectedOptions(
-      "User Status",
-      storageFilterModalOptions
-    );
+    const countries = getSelectedOptions("Country", modalOptions);
+    const formats = getSelectedOptions("Format", modalOptions);
+    const mediaTypes = getSelectedOptions("Media Type", modalOptions);
+    const sortBy = getSelectedOptions("Sort By", modalOptions);
+    const userStatus = getSelectedOptions("User Status", modalOptions);
 
     if (data) {
       let filteredData = data;
 
       if (userStatus.includes("Watching")) {
         filteredData = filteredData.filter((data) =>
-          storageFollowedAnimes.includes(data.mediaId)
+          followedAnimes.includes(data.mediaId)
         );
       }
 
@@ -207,7 +157,7 @@ export const Home = ({ navigation }: Props) => {
     }
 
     return [];
-  }, [storageFilterModalOptions, data]);
+  }, [modalOptions, data]);
 
   return (
     <Layout>
@@ -216,7 +166,7 @@ export const Home = ({ navigation }: Props) => {
           <Filter onClick={changeFilterModalState} />
           {openFilterModal && (
             <FilterModal
-              options={storageFilterModalOptions}
+              options={modalOptions}
               updateOption={updateOption}
               onClick={changeFilterModalState}
             />

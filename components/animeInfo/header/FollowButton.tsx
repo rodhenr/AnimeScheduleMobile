@@ -6,8 +6,8 @@ import {
   TouchableHighlight,
   View,
 } from "react-native";
+import { useFollowedAnimesContext } from "../../../context/FollowedAnimesContext";
 import { useTheme } from "../../../context/ThemeContext";
-import useAsyncStorage from "../../../hooks/CustomHooks";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,26 +24,29 @@ type Props = {
 };
 
 export const FollowButton = ({ animeId }: Props) => {
-  const [storageFollowedAnimes, setStorageFollowedAnimes, loading] =
-    useAsyncStorage<number[]>("followedAnimes", []);
   const { colors } = useTheme();
+  const {
+    data: followedAnimes,
+    setData: setFollowedAnimes,
+    loading: loadingFollowedAnimes,
+  } = useFollowedAnimesContext<number[]>();
 
   const isFollowing: boolean = useMemo(() => {
-    return storageFollowedAnimes.includes(animeId);
-  }, [storageFollowedAnimes]);
+    return followedAnimes.includes(animeId);
+  }, [followedAnimes]);
 
   const changeFollowState = () => {
     if (isFollowing) {
-      const filter = storageFollowedAnimes.filter((x) => x !== animeId);
-      setStorageFollowedAnimes(filter);
+      const filter = followedAnimes.filter((x) => x !== animeId);
+      setFollowedAnimes(filter);
     } else {
-      setStorageFollowedAnimes([...storageFollowedAnimes, animeId]);
+      setFollowedAnimes([...followedAnimes, animeId]);
     }
   };
 
   return (
     <View>
-      {loading ? (
+      {loadingFollowedAnimes ? (
         <ActivityIndicator size="large" color={colors.text} />
       ) : (
         <TouchableHighlight onPress={changeFollowState}>
@@ -57,7 +60,7 @@ export const FollowButton = ({ animeId }: Props) => {
               },
             ]}
           >
-            {storageFollowedAnimes.includes(animeId) ? (
+            {followedAnimes.includes(animeId) ? (
               <Text>Unfollow</Text>
             ) : (
               <Text>Follow</Text>

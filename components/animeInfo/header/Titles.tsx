@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   mainTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
   },
-  secondaryTitle: { fontSize: 14 },
+  secondaryTitle: { fontSize: 12 },
 });
 
 type Props = {
@@ -23,7 +23,7 @@ export const Titles = ({ titles }: Props) => {
   return (
     <View>
       <Text style={[styles.title, styles.mainTitle, { color: colors.text }]}>
-        {titles.english}
+        {titles.english ?? titles.romaji}
       </Text>
       <Text
         style={[styles.title, styles.secondaryTitle, { color: colors.text }]}

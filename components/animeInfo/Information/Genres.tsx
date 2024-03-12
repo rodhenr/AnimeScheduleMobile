@@ -17,6 +17,7 @@ const Genres = ({ genres }: Props) => {
       <View style={styles.container}>
         {genres.map((g) => (
           <View
+            key={g}
             style={[
               styles.itemContainer,
               { backgroundColor: colors.background },

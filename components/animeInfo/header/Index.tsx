@@ -6,7 +6,7 @@ import { Titles } from "./Titles";
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", gap: 8 },
-  innerContainer: { justifyContent: "space-between", flex: 1 },
+  innerContainer: { justifyContent: "space-between", flex: 1, gap: 16 },
 });
 
 type Props = {

@@ -30,17 +30,17 @@ export const Details = ({
   type,
 }: Props) => {
   const data = [
+    { info: status, title: "Status" },
     { info: type, title: "Type" },
     { info: episodes, title: "Episodes" },
-    { info: status, title: "Status" },
     { info: source, title: "Source" },
     { info: new Date(startDate).toLocaleDateString(), title: "Start Date" },
     {
       info: endDate ? new Date(endDate).toLocaleDateString() : null,
       title: "End Date",
     },
-    { info: season, title: "Season" },
     { info: seasonYear, title: "Season Year" },
+    { info: season, title: "Season" },
   ];
   return (
     <InfoContainer title="Information">
