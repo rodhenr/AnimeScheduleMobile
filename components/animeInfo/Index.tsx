@@ -18,6 +18,7 @@ export const AnimeInfo = ({ data }: Props) => {
         cover={data.coverImage}
         id={data.id}
         nextEpisodeInfo={data.nextAiringEpisode}
+        score={data.averageScore}
         titles={data.title}
       />
       <Information

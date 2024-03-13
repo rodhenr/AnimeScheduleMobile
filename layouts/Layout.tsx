@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     height: 50,
     paddingLeft: 16,
     paddingRight: 16,
@@ -50,9 +50,6 @@ export const Layout = ({ children }: Props) => {
           />
           <View>
             <View style={styles.titleContainer}>
-              <Text style={{ color: colors.text, fontSize: 16 }}>
-                ANIME SCHEDULE
-              </Text>
               <TouchableOpacity onPress={toggleTheme}>
                 <MaterialCommunityIcons
                   name={isDarkTheme ? "moon-waning-crescent" : "weather-sunny"}
