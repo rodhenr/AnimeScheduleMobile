@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flexDirection: "row",
-    height: 30,
     justifyContent: "space-between",
     paddingHorizontal: 16,
+    paddingVertical: 2,
   },
   text: {
-    color: "#FFF",
+    fontSize: 12,
   },
 });
 
@@ -27,8 +27,12 @@ export const EpisodeInfo = ({ airingAt, episode }: Props) => {
     <View
       style={[styles.container, { backgroundColor: colors.backgroundCard }]}
     >
-      <Text style={styles.text}>Episode {episode}</Text>
-      <Text style={styles.text}>{formatTimeTo24Hour(airingAt)}</Text>
+      <Text style={[styles.text, { color: colors.backgroundCardText }]}>
+        Episode {episode}
+      </Text>
+      <Text style={[styles.text, { color: colors.backgroundCardText }]}>
+        {formatTimeTo24Hour(airingAt)}
+      </Text>
     </View>
   );
 };

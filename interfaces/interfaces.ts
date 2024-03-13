@@ -39,6 +39,7 @@ export interface IColors {
   background: string;
   backgroundSecondary: string;
   backgroundCard: string;
+  backgroundCardText: string;
   backgroundFollowing: string;
   backgroundNotFollowing: string;
 }

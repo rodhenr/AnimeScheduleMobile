@@ -1,7 +1,7 @@
 import { IColors } from "../interfaces/interfaces";
 
 const followColors = {
-  backgroundFollowing: "#1fb542",
+  backgroundFollowing: "#2e8817",
   backgroundNotFollowing: "#db3e3e",
 };
 
@@ -10,13 +10,15 @@ export const lightColors: IColors = {
   background: "#e1e1e1",
   backgroundSecondary: "#FFF",
   backgroundCard: "rgba(0,0,0,0.7)",
+  backgroundCardText: "#FFF",
   ...followColors,
 };
 
 export const darkColors: IColors = {
-  text: "white",
-  background: "#4b4b4b",
+  text: "#dddddd",
+  background: "#363636",
   backgroundSecondary: "#1E1E1E",
-  backgroundCard: "rgba(0,0,0,0.7)",
+  backgroundCard: "rgba(0,0,0,0.8)",
+  backgroundCardText: "#dddddd",
   ...followColors,
 };

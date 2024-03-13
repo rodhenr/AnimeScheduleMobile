@@ -27,15 +27,19 @@ import { incrementOrDecrementDate } from "../utils/dateUtils";
 
 const styles = StyleSheet.create({
   innerContainer: {
-    alignItems: "center",
     flex: 1,
     gap: 16,
     padding: 16,
   },
+  filterContainer: {
+    flexDirection: "row",
+    gap: 16,
+    justifyContent: "space-between",
+  },
   cardsContainer: {
-    alignItems: "center",
     flex: 1,
     gap: 8,
+    width: "100%",
   },
 });
 
@@ -159,11 +163,14 @@ export const Home = ({ navigation }: Props) => {
     return [];
   }, [modalOptions, data]);
 
+  const isFollowing = (animeId: number) => {
+    return followedAnimes.includes(animeId);
+  };
+
   return (
     <Layout>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.innerContainer}>
-          <Filter onClick={changeFilterModalState} />
           {openFilterModal && (
             <FilterModal
               options={modalOptions}
@@ -171,13 +178,20 @@ export const Home = ({ navigation }: Props) => {
               onClick={changeFilterModalState}
             />
           )}
-          {date && <DateSelector date={date!} updateDate={updateDate} />}
-          {isPending ? (
+          <View style={styles.filterContainer}>
+            {date && <DateSelector date={date!} updateDate={updateDate} />}
+            <Filter onClick={changeFilterModalState} />
+          </View>
+          {isPending || loadingFollowedAnimes ? (
             <ActivityIndicator size="large" color={colors.text} />
           ) : data ? (
             <View style={styles.cardsContainer}>
               {filterAndSortData.map((i) => (
-                <AnimeCard data={i} key={i.mediaId} />
+                <AnimeCard
+                  data={i}
+                  key={i.mediaId}
+                  isFollowing={isFollowing(i.mediaId)}
+                />
               ))}
             </View>
           ) : (

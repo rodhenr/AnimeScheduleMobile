@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import { useTheme } from "../../context/ThemeContext";
 
 type Props = {
   englishName: string;
@@ -8,20 +9,25 @@ type Props = {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.7)",
-    height: 30,
     justifyContent: "center",
+    padding: 4,
   },
   text: {
-    color: "#FFF",
     fontSize: 12,
+    textAlign: "justify",
   },
 });
 
 export const NameInfo = ({ englishName, romajiName }: Props) => {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{englishName ?? romajiName}</Text>
+    <View
+      style={[styles.container, { backgroundColor: colors.backgroundCard }]}
+    >
+      <Text style={[styles.text, { color: colors.backgroundCardText }]}>
+        {englishName ?? romajiName}
+      </Text>
     </View>
   );
 };
