@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     borderRadius: 4,
-    height: 40,
+    height: 35,
     justifyContent: "center",
-    padding: 4,
   },
+  text: { color: "#ededed", fontSize: 16 },
 });
 
 type Props = {
@@ -61,9 +61,9 @@ export const FollowButton = ({ animeId }: Props) => {
             ]}
           >
             {followedAnimes.includes(animeId) ? (
-              <Text>Unfollow</Text>
+              <Text style={styles.text}>Watching</Text>
             ) : (
-              <Text>Follow</Text>
+              <Text style={styles.text}>Not Watching</Text>
             )}
           </View>
         </TouchableHighlight>

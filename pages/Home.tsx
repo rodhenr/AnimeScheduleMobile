@@ -161,7 +161,7 @@ export const Home = ({ navigation }: Props) => {
     }
 
     return [];
-  }, [modalOptions, data]);
+  }, [modalOptions, data, followedAnimes]);
 
   const isFollowing = (animeId: number) => {
     return followedAnimes.includes(animeId);

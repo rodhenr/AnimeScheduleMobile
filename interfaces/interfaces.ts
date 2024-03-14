@@ -11,13 +11,15 @@ export interface IMedia {
   coverImage: string;
   format: string;
   type: string;
-  countryOfOrigin: string;
+  countryOfOrigin: ICountries;
 }
 
 export interface ITitles {
   romaji: string;
   english: string;
 }
+
+export type ICountries = "JP" | "CN" | "KR" | "TW";
 
 export enum DaysOfWeek {
   Sunday = 0,
@@ -69,7 +71,7 @@ export interface IAnimeInfo {
   coverImage: string;
   format: string;
   type: string;
-  countryOfOrigin: string;
+  countryOfOrigin: ICountries;
   status: string;
   description: string;
   averageScore: number;

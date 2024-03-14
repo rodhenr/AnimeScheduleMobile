@@ -1,17 +1,27 @@
 import { Image, StyleSheet, View } from "react-native";
-import { INextEpisode, ITitles } from "../../../interfaces/interfaces";
+import {
+  ICountries,
+  INextEpisode,
+  ITitles,
+} from "../../../interfaces/interfaces";
 import { FollowButton } from "./FollowButton";
 import { NextEpisode } from "./NextEpisode";
 import { Titles } from "./Titles";
-import { Stars } from "./Stars";
+import { Rating } from "./Rating";
+import { Flag } from "./Flag";
 
 const styles = StyleSheet.create({
   container: { flex: 1, gap: 8 },
   innerContainer: { justifyContent: "space-between", flex: 1, gap: 16 },
   image: { borderRadius: 8, height: 350 },
+  ratingCountryContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 
 type Props = {
+  countryOfOrigin: ICountries;
   cover: string;
   id: number;
   nextEpisodeInfo: INextEpisode | null;
@@ -20,6 +30,7 @@ type Props = {
 };
 
 export const Header = ({
+  countryOfOrigin,
   cover,
   id,
   nextEpisodeInfo,
@@ -33,7 +44,10 @@ export const Header = ({
       </View>
       <View style={styles.innerContainer}>
         <Titles titles={titles} />
-        <Stars score={score} />
+        <View style={styles.ratingCountryContainer}>
+          <Rating score={score} />
+          <Flag flagName={countryOfOrigin} />
+        </View>
         {nextEpisodeInfo && (
           <NextEpisode
             airingAt={nextEpisodeInfo.airingAt}

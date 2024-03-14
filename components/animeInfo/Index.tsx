@@ -15,6 +15,7 @@ export const AnimeInfo = ({ data }: Props) => {
   return (
     <View style={styles.container}>
       <Header
+        countryOfOrigin={data.countryOfOrigin}
         cover={data.coverImage}
         id={data.id}
         nextEpisodeInfo={data.nextAiringEpisode}
