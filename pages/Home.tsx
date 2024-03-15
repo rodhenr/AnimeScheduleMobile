@@ -22,7 +22,6 @@ import {
   RootStackParamList,
   dateActionType,
 } from "../interfaces/interfaces";
-import { Layout } from "../layouts/Layout";
 import { incrementOrDecrementDate } from "../utils/dateUtils";
 
 const styles = StyleSheet.create({
@@ -168,37 +167,40 @@ export const Home = ({ navigation }: Props) => {
   };
 
   return (
-    <Layout>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.innerContainer}>
-          {openFilterModal && (
-            <FilterModal
-              options={modalOptions}
-              updateOption={updateOption}
-              onClick={changeFilterModalState}
-            />
-          )}
-          <View style={styles.filterContainer}>
-            {date && <DateSelector date={date!} updateDate={updateDate} />}
-            <Filter onClick={changeFilterModalState} />
-          </View>
-          {isPending || loadingFollowedAnimes ? (
-            <ActivityIndicator size="large" color={colors.text} />
-          ) : data ? (
-            <View style={styles.cardsContainer}>
-              {filterAndSortData.map((i) => (
-                <AnimeCard
-                  data={i}
-                  key={i.mediaId}
-                  isFollowing={isFollowing(i.mediaId)}
-                />
-              ))}
-            </View>
-          ) : (
-            <Text>Error...</Text>
-          )}
+    <ScrollView
+      contentContainerStyle={{
+        backgroundColor: colors.background,
+        flexGrow: 1,
+      }}
+    >
+      <View style={styles.innerContainer}>
+        {openFilterModal && (
+          <FilterModal
+            options={modalOptions}
+            updateOption={updateOption}
+            onClick={changeFilterModalState}
+          />
+        )}
+        <View style={styles.filterContainer}>
+          {date && <DateSelector date={date!} updateDate={updateDate} />}
+          <Filter onClick={changeFilterModalState} />
         </View>
-      </ScrollView>
-    </Layout>
+        {isPending || loadingFollowedAnimes ? (
+          <ActivityIndicator size="large" color={colors.text} />
+        ) : data ? (
+          <View style={styles.cardsContainer}>
+            {filterAndSortData.map((i) => (
+              <AnimeCard
+                data={i}
+                key={i.mediaId}
+                isFollowing={isFollowing(i.mediaId)}
+              />
+            ))}
+          </View>
+        ) : (
+          <Text>Error...</Text>
+        )}
+      </View>
+    </ScrollView>
   );
 };

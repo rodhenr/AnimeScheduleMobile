@@ -60,6 +60,7 @@ export interface IModalOption {
 export type RootStackParamList = {
   Home: undefined;
   Anime: { id: number };
+  UserList: undefined;
 };
 
 export interface IAnimeInfo {
