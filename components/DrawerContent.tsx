@@ -1,5 +1,9 @@
 // DrawerContent.js
-import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import {
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+} from "@react-navigation/drawer";
 import {
   DrawerDescriptorMap,
   DrawerNavigationHelpers,
@@ -20,8 +24,9 @@ const DrawerContent = (props: Props) => {
   return (
     <DrawerContentScrollView
       {...props}
-      style={[{ backgroundColor: colors.background }]}
+      style={[{ backgroundColor: colors.background, flex: 1 }]}
     >
+      <DrawerItemList {...props} />
       <DrawerItem
         label={() => (
           <View style={{ flexDirection: "row", alignItems: "center" }}>

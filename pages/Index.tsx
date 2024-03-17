@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import DrawerContent from "../components/DrawerContent";
 import { useTheme } from "../context/ThemeContext";
 import { RootStackParamList } from "../interfaces/interfaces";
+import { Anime } from "./Anime";
 import { Home } from "./Home";
 import UserList from "./UserList";
 
@@ -18,15 +19,24 @@ const NavigationComponents = () => {
         initialRouteName="Home"
         drawerContent={(props) => <DrawerContent {...props} />}
         screenOptions={{
-          drawerStyle: { width: 200 },
+          drawerStyle: { width: 250 },
           headerStyle: {
             backgroundColor: colors.background,
+            elevation: 0,
           },
           headerTintColor: colors.text,
+          drawerInactiveTintColor: colors.text,
         }}
       >
         <Drawer.Screen component={Home} name="Home" />
         <Drawer.Screen component={UserList} name="UserList" />
+        <Drawer.Screen
+          component={Anime}
+          name="Anime"
+          options={{
+            drawerItemStyle: { display: "none" },
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );

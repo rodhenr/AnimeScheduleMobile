@@ -38,6 +38,7 @@ export enum dateActionType {
 
 export interface IColors {
   text: string;
+  textActive: string;
   background: string;
   backgroundSecondary: string;
   backgroundCard: string;
