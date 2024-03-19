@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type AnimeCardNavigationProp = StackNavigationProp<RootStackParamList, "Anime">;
+export type AnimeCardNavigationProp = StackNavigationProp<RootStackParamList, "Anime">;
 
 export const AnimeCard = ({ data, isFollowing }: Props) => {
   const navigation = useNavigation<AnimeCardNavigationProp>();

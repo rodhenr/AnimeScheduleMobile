@@ -18,7 +18,7 @@ export const AnimeInfo = ({ data }: Props) => {
         countryOfOrigin={data.countryOfOrigin}
         cover={data.coverImage}
         id={data.id}
-        name={data.title.english}
+        name={data.title.english ?? data.title.romaji}
         nextEpisodeInfo={data.nextAiringEpisode}
         score={data.averageScore}
         titles={data.title}

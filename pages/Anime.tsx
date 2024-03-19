@@ -1,14 +1,14 @@
 import { Feather } from "@expo/vector-icons";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { useGetAnimeInfoQuery } from "../api/queries/AnimeInfoQueries";
 import { AnimeInfo } from "../components/animeInfo/Index";
 import { useTheme } from "../context/ThemeContext";
 import { RootStackParamList } from "../interfaces/interfaces";
-import { ScrollView } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
-  container: { flex: 1, gap: 24, paddingHorizontal: 12 },
+  container: { flex: 1, gap: 16, paddingHorizontal: 16, paddingVertical: 20 },
 });
 
 type AnimeScreenRouteProp = RouteProp<RootStackParamList, "Anime">;
@@ -29,7 +29,7 @@ export const Anime = ({ route }: Props) => {
       <View style={styles.container}>
         <Feather
           name="arrow-left"
-          size={20}
+          size={24}
           onPress={() => navigation.goBack()}
           color={colors.text}
         />

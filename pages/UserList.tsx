@@ -1,31 +1,52 @@
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import {
   ActivityIndicator,
+  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import {
-  IFollowedAnime,
-  useFollowedAnimesContext,
-} from "../context/FollowedAnimesContext";
-import { useTheme } from "../context/ThemeContext";
 import { FlatList } from "react-native-gesture-handler";
-import { useState } from "react";
+import { AnimeCardNavigationProp } from "../components/card/Index";
+import { useFollowedAnimesContext } from "../context/FollowedAnimesContext";
+import { useTheme } from "../context/ThemeContext";
 
 const styles = StyleSheet.create({
-  container: { flex: 1, gap: 24, padding: 16 },
+  container: { flex: 1 },
   title: { fontSize: 24, fontWeight: "bold" },
-  listContainer: { flex: 1, gap: 24 },
+  listContainer: {
+    flex: 1,
+    gap: 4,
+  },
   itemContainer: {
     alignItems: "center",
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
     flex: 1,
     flexDirection: "row",
+    gap: 24,
     justifyContent: "space-between",
-    gap: 8,
+    paddingVertical: 8,
   },
-  item: {},
+  clearButton: {
+    alignSelf: "flex-end",
+    borderRadius: 4,
+    flexDirection: "row",
+    elevation: 2,
+    justifyContent: "center",
+    padding: 4,
+    width: 55,
+    textAlign: "center",
+  },
+  clearButtonText: {
+    color: "white",
+    fontSize: 12,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });
 
 type Props = {};
@@ -34,6 +55,7 @@ const UserList = ({}: Props) => {
   const { data, loading, removeItem, removeAll } = useFollowedAnimesContext();
   const { colors } = useTheme();
   const [isRemoving, setIsRemoving] = useState<boolean>(false);
+  const navigation = useNavigation<AnimeCardNavigationProp>();
 
   const removeFollowedAnime = (id: number) => {
     try {
@@ -56,24 +78,34 @@ const UserList = ({}: Props) => {
         />
       ) : (
         <View style={styles.listContainer}>
-          <TouchableOpacity onPress={() => removeAll()}>
-            <Text style={{ alignSelf: "flex-end", color: colors.text }}>
-              Clear All
-            </Text>
-          </TouchableOpacity>
+          <View style={{ paddingHorizontal: 16 }}>
+            <Pressable
+              onPress={() => removeAll()}
+              style={[
+                styles.clearButton,
+                { backgroundColor: colors.backgroundNotFollowing },
+              ]}
+            >
+              <Text style={[styles.clearButtonText, { alignSelf: "flex-end" }]}>
+                Clear
+              </Text>
+            </Pressable>
+          </View>
           <FlatList
             contentContainerStyle={{
-              gap: 8,
+              padding: 16,
             }}
             data={data}
             renderItem={({ item }) => (
               <View key={item.id} style={styles.itemContainer}>
-                <Text style={{ color: colors.text }}>{item.name}</Text>
                 <TouchableOpacity
-                  onPress={() => removeFollowedAnime(item.id)}
-                  style={{ flex: 1 }}
+                  onPress={() => navigation.navigate("Anime", { id: item.id })}
+                  style={{ flexShrink: 1 }}
                 >
-                  <Feather name="x" size={20} color="red" style={{ flex: 1 }} />
+                  <Text style={{ color: colors.text }}>{item.name}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => removeFollowedAnime(item.id)}>
+                  <Feather name="x" size={24} color="red" />
                 </TouchableOpacity>
               </View>
             )}

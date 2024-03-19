@@ -46,6 +46,8 @@ export const Details = ({
     <InfoContainer title="Information">
       <View style={styles.container}>
         <FlatList
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
           data={data}
           numColumns={3}
           keyExtractor={(_, index) => index.toString()}

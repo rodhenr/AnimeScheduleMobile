@@ -13,7 +13,10 @@ import { DateSelector } from "../components/dateSelector/Index";
 import { Filter } from "../components/filter/Index";
 import { FilterModal } from "../components/filter/modal/Index";
 import { defaultModalOptions } from "../config/defaultData";
-import { useFollowedAnimesContext } from "../context/FollowedAnimesContext";
+import {
+  IFollowedAnime,
+  useFollowedAnimesContext,
+} from "../context/FollowedAnimesContext";
 import { useTheme } from "../context/ThemeContext";
 import useAsyncStorage from "../hooks/CustomHooks";
 import {
@@ -53,7 +56,7 @@ export const Home = ({ navigation }: Props) => {
   const [date, setDate] = useState<Date | null>(null);
   const [openFilterModal, setOpenFilterModal] = useState(false);
   const { data: followedAnimes, loading: loadingFollowedAnimes } =
-    useFollowedAnimesContext<number[]>();
+    useFollowedAnimesContext();
   const [modalOptions, setModalOptions] = useAsyncStorage<IModalData[]>(
     "filterModalOptions",
     defaultModalOptions
@@ -192,7 +195,7 @@ export const Home = ({ navigation }: Props) => {
             {filterAndSortData.map((i) => (
               <AnimeCard
                 data={i}
-                key={i.mediaId}
+                key={`${i.mediaId}-${i.episode}`}
                 isFollowing={isFollowing(i.mediaId)}
               />
             ))}

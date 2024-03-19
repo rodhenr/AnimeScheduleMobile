@@ -1,4 +1,3 @@
-// DrawerContent.js
 import {
   DrawerContentScrollView,
   DrawerItem,
@@ -9,6 +8,7 @@ import {
   DrawerNavigationHelpers,
 } from "@react-navigation/drawer/lib/typescript/src/types";
 import { DrawerNavigationState, ParamListBase } from "@react-navigation/native";
+import { useState } from "react";
 import { Switch, Text, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 
@@ -31,7 +31,7 @@ const DrawerContent = (props: Props) => {
         label={() => (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={{ color: colors.text }}>Dark Mode</Text>
-            <Switch value={isDarkTheme} onValueChange={toggleTheme} />
+            <Switch value={isDarkTheme} onValueChange={() => toggleTheme()} />
           </View>
         )}
         onPress={() => {}}

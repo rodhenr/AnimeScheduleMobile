@@ -30,16 +30,13 @@ const useAsyncStorage = <T,>(
     loadData();
   }, [key]);
 
+  useEffect(() => {
+    const value = JSON.stringify(data);
+    AsyncStorage.setItem(key, value);
+  }, [data]);
+
   const setAsyncStorage = async (newValue: T) => {
-    try {
-      const value = JSON.stringify(newValue);
-
-      await AsyncStorage.setItem(key, value);
-
-      setData(newValue);
-    } catch (error) {
-      console.error(error);
-    }
+    setData(newValue);
   };
 
   return [data, setAsyncStorage, loading];

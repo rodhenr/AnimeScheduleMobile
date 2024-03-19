@@ -19,7 +19,7 @@ const NavigationComponents = () => {
         initialRouteName="Home"
         drawerContent={(props) => <DrawerContent {...props} />}
         screenOptions={{
-          drawerStyle: { width: 250 },
+          drawerStyle: { width: 200 },
           headerStyle: {
             backgroundColor: colors.background,
             elevation: 0,
@@ -29,7 +29,7 @@ const NavigationComponents = () => {
         }}
       >
         <Drawer.Screen component={Home} name="Home" />
-        <Drawer.Screen component={UserList} name="UserList" />
+        <Drawer.Screen component={UserList} name="Following" />
         <Drawer.Screen
           component={Anime}
           name="Anime"
