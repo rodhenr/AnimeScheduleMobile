@@ -34,7 +34,7 @@ const NavigationComponents = () => {
           component={Anime}
           name="Anime"
           options={{
-            drawerItemStyle: { display: "none" },
+            drawerItemStyle: { display: "none", flex: 1 },
           }}
         />
       </Drawer.Navigator>

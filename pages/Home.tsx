@@ -135,7 +135,7 @@ export const Home = ({ navigation }: Props) => {
 
       if (userStatus.includes("Watching")) {
         filteredData = filteredData.filter((data) =>
-          followedAnimes.includes(data.mediaId)
+          followedAnimes.some((x) => x.id === data.mediaId)
         );
       }
 
@@ -163,7 +163,7 @@ export const Home = ({ navigation }: Props) => {
   }, [modalOptions, data, followedAnimes]);
 
   const isFollowing = (animeId: number) => {
-    return followedAnimes.includes(animeId);
+    return followedAnimes.some((x) => x.id === animeId);
   };
 
   return (

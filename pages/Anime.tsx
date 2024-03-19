@@ -8,7 +8,7 @@ import { RootStackParamList } from "../interfaces/interfaces";
 import { ScrollView } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
-  container: { gap: 16, paddingHorizontal: 12 },
+  container: { flex: 1, gap: 24, paddingHorizontal: 12 },
 });
 
 type AnimeScreenRouteProp = RouteProp<RootStackParamList, "Anime">;
@@ -25,8 +25,8 @@ export const Anime = ({ route }: Props) => {
   const { data, isLoading, isError } = useGetAnimeInfoQuery(id);
 
   return (
-    <ScrollView>
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <ScrollView style={{ backgroundColor: colors.background, flex: 1 }}>
+      <View style={styles.container}>
         <Feather
           name="arrow-left"
           size={20}
@@ -36,7 +36,11 @@ export const Anime = ({ route }: Props) => {
         {data ? (
           <AnimeInfo data={data} />
         ) : isLoading && !isError ? (
-          <ActivityIndicator />
+          <ActivityIndicator
+            size="large"
+            color={colors.text}
+            style={{ flex: 1 }}
+          />
         ) : (
           <View>
             <Text>Error...</Text>

@@ -24,6 +24,7 @@ type Props = {
   countryOfOrigin: ICountries;
   cover: string;
   id: number;
+  name: string;
   nextEpisodeInfo: INextEpisode | null;
   score: number;
   titles: ITitles;
@@ -33,6 +34,7 @@ export const Header = ({
   countryOfOrigin,
   cover,
   id,
+  name,
   nextEpisodeInfo,
   score,
   titles,
@@ -54,7 +56,7 @@ export const Header = ({
             episode={nextEpisodeInfo.episode}
           />
         )}
-        <FollowButton animeId={id} />
+        <FollowButton animeId={id} animeName={name} />
       </View>
     </View>
   );

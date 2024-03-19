@@ -6,7 +6,10 @@ import {
   TouchableHighlight,
   View,
 } from "react-native";
-import { useFollowedAnimesContext } from "../../../context/FollowedAnimesContext";
+import {
+  IFollowedAnime,
+  useFollowedAnimesContext,
+} from "../../../context/FollowedAnimesContext";
 import { useTheme } from "../../../context/ThemeContext";
 
 const styles = StyleSheet.create({
@@ -21,26 +24,28 @@ const styles = StyleSheet.create({
 
 type Props = {
   animeId: number;
+  animeName: string;
 };
 
-export const FollowButton = ({ animeId }: Props) => {
+export const FollowButton = ({ animeId, animeName }: Props) => {
   const { colors } = useTheme();
   const {
     data: followedAnimes,
     setData: setFollowedAnimes,
     loading: loadingFollowedAnimes,
-  } = useFollowedAnimesContext<number[]>();
+  } = useFollowedAnimesContext();
 
   const isFollowing: boolean = useMemo(() => {
-    return followedAnimes.includes(animeId);
+    return followedAnimes.some((x) => x.id === animeId);
   }, [followedAnimes]);
 
   const changeFollowState = () => {
     if (isFollowing) {
-      const filter = followedAnimes.filter((x) => x !== animeId);
+      const filter = followedAnimes.filter((x) => x.id !== animeId);
+
       setFollowedAnimes(filter);
     } else {
-      setFollowedAnimes([...followedAnimes, animeId]);
+      setFollowedAnimes([...followedAnimes, { id: animeId, name: animeName }]);
     }
   };
 
@@ -60,7 +65,7 @@ export const FollowButton = ({ animeId }: Props) => {
               },
             ]}
           >
-            {followedAnimes.includes(animeId) ? (
+            {followedAnimes.some((x) => x.id === animeId) ? (
               <Text style={styles.text}>Watching</Text>
             ) : (
               <Text style={styles.text}>Not Watching</Text>
