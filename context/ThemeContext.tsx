@@ -1,17 +1,7 @@
-import { createContext, useContext, useState } from "react";
-import { IColors } from "../interfaces/interfaces";
+import { createContext, useContext } from "react";
+import useAsyncStorage from "../hooks/useAsyncStorageHook";
 import { darkColors, lightColors } from "../themes/colors";
-import useAsyncStorage from "../hooks/CustomHooks";
-
-interface ThemeContextType {
-  isDarkTheme: boolean;
-  toggleTheme: () => void;
-  colors: IColors;
-}
-
-type Props = {
-  children: React.ReactNode;
-};
+import { ThemeContextProps, ThemeContextType } from "./ThemeContext.types";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -25,7 +15,7 @@ export const useTheme = () => {
   return context;
 };
 
-export const ThemeProvider = ({ children }: Props) => {
+export const ThemeProvider = ({ children }: ThemeContextProps) => {
   const [storageIsDarkTheme, setStorageIsDarkTheme] = useAsyncStorage<boolean>(
     "isDarkTheme",
     false

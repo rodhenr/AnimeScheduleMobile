@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useGetAnimeInfoQuery } from "../api/queries/AnimeInfoQueries";
 import { AnimeInfo } from "../components/animeInfo/Index";
 import { useTheme } from "../context/ThemeContext";
-import { RootStackParamList } from "../interfaces/interfaces";
+import { RootStackParamList } from "./Index";
 
 const styles = StyleSheet.create({
   container: { flex: 1, gap: 16, paddingHorizontal: 16, paddingVertical: 20 },
@@ -13,14 +13,15 @@ const styles = StyleSheet.create({
 
 type AnimeScreenRouteProp = RouteProp<RootStackParamList, "Anime">;
 
-type Props = {
+type AnimeProps = {
   route: AnimeScreenRouteProp;
 };
 
-export const Anime = ({ route }: Props) => {
-  const { id } = route.params;
+export const Anime = ({ route }: AnimeProps) => {
   const navigation = useNavigation();
   const { colors } = useTheme();
+
+  const { id } = route.params;
 
   const { data, isLoading, isError } = useGetAnimeInfoQuery(id);
 

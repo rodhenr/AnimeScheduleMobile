@@ -1,10 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
-
-type Props = {
-  englishName: string;
-  romajiName: string;
-};
+import { NameInfoProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +14,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const NameInfo = ({ englishName, romajiName }: Props) => {
+export const NameInfo = ({ englishName, romajiName }: NameInfoProps) => {
   const { colors } = useTheme();
 
   return (

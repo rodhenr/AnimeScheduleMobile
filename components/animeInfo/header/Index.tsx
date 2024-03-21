@@ -1,14 +1,14 @@
 import { Image, StyleSheet, View } from "react-native";
 import {
-  ICountries,
-  INextEpisode,
-  ITitles,
-} from "../../../interfaces/interfaces";
+  CountriesType,
+  NextEpisodeType,
+  TitlesType,
+} from "../../../api/queries/AnimeInfoQueries.types";
+import { Flag } from "./Flag";
 import { FollowButton } from "./FollowButton";
 import { NextEpisode } from "./NextEpisode";
-import { Titles } from "./Titles";
 import { Rating } from "./Rating";
-import { Flag } from "./Flag";
+import { Titles } from "./Titles";
 
 const styles = StyleSheet.create({
   container: { flex: 1, gap: 8 },
@@ -21,13 +21,13 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  countryOfOrigin: ICountries;
+  countryOfOrigin: CountriesType;
   cover: string;
   id: number;
   name: string;
-  nextEpisodeInfo: INextEpisode | null;
+  nextEpisodeInfo: NextEpisodeType | null;
   score: number;
-  titles: ITitles;
+  titles: TitlesType;
 };
 
 export const Header = ({

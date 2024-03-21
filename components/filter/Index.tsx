@@ -1,10 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
-
-type Props = {
-  onClick: () => void;
-};
+import { FilterProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Filter = ({ onClick }: Props) => {
+export const Filter = ({ onClick }: FilterProps) => {
   const { colors } = useTheme();
 
   return (

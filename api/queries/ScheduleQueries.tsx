@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosClient } from "../../common/axios";
-import { IApiData } from "../../interfaces/interfaces";
+import { ScheduleType } from "./ScheduleQueries.types";
 
 export const useGetDailySchedulesQuery = (date: Date | null) => {
   const axios = AxiosClient();
@@ -9,7 +9,7 @@ export const useGetDailySchedulesQuery = (date: Date | null) => {
     queryKey: ["dailySchedules", date?.toDateString(), "daily"],
     queryFn: () =>
       axios
-        .get<IApiData[]>(
+        .get<ScheduleType[]>(
           `/getSchedules?date=${date?.toLocaleDateString()}&searchType=Daily`
         )
         .then((res) => res.data),

@@ -1,19 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
-import { IModalOption } from "../../../interfaces/interfaces";
+import { ItemGroupProps } from "../Index.types";
 import { Item } from "./Item";
-
-type Props = {
-  name: string;
-  options: IModalOption[];
-  allowMultipleSelection: boolean;
-  updateOption: (
-    categoryName: string,
-    optionName: string,
-    allowMultipleSelection: boolean,
-    isSelected: boolean
-  ) => void;
-};
 
 const styles = StyleSheet.create({
   modalOptionsContainer: {
@@ -28,7 +16,7 @@ export const ItemGroup = ({
   name,
   options,
   updateOption,
-}: Props) => {
+}: ItemGroupProps) => {
   const { colors } = useTheme();
 
   return (

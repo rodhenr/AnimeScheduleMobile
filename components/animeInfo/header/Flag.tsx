@@ -1,5 +1,5 @@
 import { Image, StyleSheet, View } from "react-native";
-import { ICountries } from "../../../interfaces/interfaces";
+import { CountriesType } from "../../../api/queries/AnimeInfoQueries.types";
 
 const styles = StyleSheet.create({
   container: {},
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  flagName: ICountries;
+  flagName: CountriesType;
 };
 
 export const Flag = ({ flagName }: Props) => {

@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-type UseAsyncStorageResult<T> = [T, (value: T) => void, boolean];
+import { useEffect, useState } from "react";
+import { UseAsyncStorageResultType } from "./useAsyncStorageHook.types";
 
 const useAsyncStorage = <T,>(
   key: string,
   initialValue: T
-): UseAsyncStorageResult<T> => {
+): UseAsyncStorageResultType<T> => {
   const [data, setData] = useState<T>(initialValue);
   const [loading, setLoading] = useState<boolean>(true);
-
-  //AsyncStorage.clear();
 
   useEffect(() => {
     const loadData = async () => {
@@ -31,13 +28,10 @@ const useAsyncStorage = <T,>(
   }, [key]);
 
   useEffect(() => {
-    const value = JSON.stringify(data);
-    AsyncStorage.setItem(key, value);
+    AsyncStorage.setItem(key, JSON.stringify(data));
   }, [data]);
 
-  const setAsyncStorage = async (newValue: T) => {
-    setData(newValue);
-  };
+  const setAsyncStorage = async (newValue: T) => setData(newValue);
 
   return [data, setAsyncStorage, loading];
 };

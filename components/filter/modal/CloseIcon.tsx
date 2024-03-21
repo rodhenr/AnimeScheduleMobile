@@ -1,12 +1,9 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
+import { CloseIconProps } from "../Index.types";
 
-type Props = {
-  onClick: () => void;
-};
-
-export const CloseIcon = ({ onClick }: Props) => {
+export const CloseIcon = ({ onClick }: CloseIconProps) => {
   const { colors } = useTheme();
 
   return (

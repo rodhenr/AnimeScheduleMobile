@@ -35,7 +35,7 @@ yarn-error.*
 *.tsbuildinfo
 
 # Ignore system directories
-%ProgramData%\Microsoft\Windows\UUS\State\*
+%ProgramData%
 
 # Ignore temporary files
 *.tmp

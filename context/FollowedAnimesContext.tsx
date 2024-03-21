@@ -1,25 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  FollowedAnimesContextProps,
+  FollowedAnimesContextType,
+  FollowedAnimeType,
+} from "./FollowedAnimesContext.types";
 
-export interface IFollowedAnime {
-  id: number;
-  name: string;
-}
-
-// Define the context type
-type FollowedAnimesContextType = {
-  data: IFollowedAnime[];
-  setData: (value: IFollowedAnime[]) => void;
-  loading: boolean;
-  removeItem: (id: number) => void;
-  removeAll: () => void;
-};
-
-type Props = {
-  children: React.ReactNode;
-};
-
-// Create the context
 const FollowedAnimesContext = createContext<FollowedAnimesContextType>({
   data: [],
   setData: () => {},
@@ -28,9 +14,8 @@ const FollowedAnimesContext = createContext<FollowedAnimesContextType>({
   removeAll: () => {},
 });
 
-// Provider component with async storage logic
-const FollowedAnimesProvider = ({ children }: Props) => {
-  const [data, setData] = useState<IFollowedAnime[]>([]);
+const FollowedAnimesProvider = ({ children }: FollowedAnimesContextProps) => {
+  const [data, setData] = useState<FollowedAnimeType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const key = "followedAnimes";
 
@@ -51,7 +36,7 @@ const FollowedAnimesProvider = ({ children }: Props) => {
     loadData();
   }, [key]);
 
-  const setAsyncStorage = async (newValue: IFollowedAnime[]) => {
+  const setAsyncStorage = async (newValue: FollowedAnimeType[]) => {
     try {
       const value = JSON.stringify(newValue);
       await AsyncStorage.setItem(key, value);

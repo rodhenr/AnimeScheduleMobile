@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
-import { dateActionType } from "../../interfaces/interfaces";
 import { DateInfo } from "./DateInfo";
 import { SelectorIcon } from "./SelectorIcon";
+import { DateActionType } from "../../utils/dateUtils";
 
 type Props = {
-  updateDate: (type: dateActionType) => void;
+  updateDate: (type: DateActionType) => void;
   date: Date;
 };
 
@@ -36,13 +36,13 @@ export const DateSelector = ({ date, updateDate }: Props) => {
     >
       <SelectorIcon
         iconName={"chevron-left"}
-        type={dateActionType.Decrement}
+        type={DateActionType.Decrement}
         updateDate={updateDate}
       />
       <DateInfo date={date} />
       <SelectorIcon
         iconName={"chevron-right"}
-        type={dateActionType.Increment}
+        type={DateActionType.Increment}
         updateDate={updateDate}
       />
     </View>

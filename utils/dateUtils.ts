@@ -1,4 +1,17 @@
-import { DaysOfWeek, dateActionType } from "../interfaces/interfaces";
+export enum DaysOfWeek {
+  Sunday = 0,
+  Monday = 1,
+  Tuesday = 2,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6,
+}
+
+export enum DateActionType {
+  Increment,
+  Decrement,
+}
 
 export const getUserCurrentDate = (): Date => new Date();
 
@@ -7,11 +20,11 @@ export const getDayOfTheWeek = (date: Date): string =>
 
 export const incrementOrDecrementDate = (
   date: Date,
-  type: dateActionType
+  type: DateActionType
 ): Date => {
   const newDate = new Date(date);
 
-  if (type === dateActionType.Increment) {
+  if (type === DateActionType.Increment) {
     newDate.setDate(newDate.getDate() + 1); // Increment date by 1 day
   } else {
     newDate.setDate(newDate.getDate() - 1); // Decrement date by 1 day

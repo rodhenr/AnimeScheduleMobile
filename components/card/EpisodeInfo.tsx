@@ -1,11 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import { formatTimeTo24Hour } from "../../utils/dateUtils";
-
-type Props = {
-  airingAt: Date;
-  episode: number;
-};
+import { EpisodeInfoProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +16,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const EpisodeInfo = ({ airingAt, episode }: Props) => {
+export const EpisodeInfo = ({ airingAt, episode }: EpisodeInfoProps) => {
   const { colors } = useTheme();
 
   return (

@@ -1,6 +1,6 @@
-import { IModalData } from "../interfaces/interfaces";
+import { DefaultModalDataType } from "./defaultModalData.types";
 
-export const defaultModalOptions: IModalData[] = [
+export const defaultModalOptions: DefaultModalDataType[] = [
   {
     name: "Country",
     options: [

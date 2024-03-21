@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
+import { TitlesType } from "../../../api/queries/AnimeInfoQueries.types";
 import { useTheme } from "../../../context/ThemeContext";
-import { ITitles } from "../../../interfaces/interfaces";
 
 const styles = StyleSheet.create({
   title: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
-  titles: ITitles;
+  titles: TitlesType;
 };
 
 export const Titles = ({ titles }: Props) => {

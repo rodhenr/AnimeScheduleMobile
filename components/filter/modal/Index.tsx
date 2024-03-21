@@ -1,19 +1,9 @@
 import { Modal, ScrollView, StyleSheet, Text, View } from "react-native";
+import { DefaultModalDataType } from "../../../common/defaultModalData.types";
 import { useTheme } from "../../../context/ThemeContext";
-import { IModalData } from "../../../interfaces/interfaces";
+import { FilterModalProps } from "../Index.types";
 import { CloseIcon } from "./CloseIcon";
 import { ItemGroup } from "./ItemGroup";
-
-type Props = {
-  onClick: () => void;
-  options: IModalData[];
-  updateOption: (
-    categoryName: string,
-    optionName: string,
-    allowMultipleSelection: boolean,
-    isSelected: boolean
-  ) => void;
-};
 
 const styles = StyleSheet.create({
   root: {
@@ -33,7 +23,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export const FilterModal = ({ options, updateOption, onClick }: Props) => {
+export const FilterModal = ({
+  options,
+  updateOption,
+  onClick,
+}: FilterModalProps) => {
   const { colors } = useTheme();
 
   return (
@@ -51,7 +45,7 @@ export const FilterModal = ({ options, updateOption, onClick }: Props) => {
             <CloseIcon onClick={onClick} />
           </View>
           <View style={styles.modalDataContainer}>
-            {options.map((opt: IModalData) => (
+            {options.map((opt: DefaultModalDataType) => (
               <ItemGroup
                 key={opt.name}
                 allowMultipleSelection={opt.allowMultipleSelection}

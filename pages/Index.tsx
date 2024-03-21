@@ -1,12 +1,17 @@
 import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerContent from "../components/DrawerContent";
+import DrawerContent from "../components/drawer/Index";
 import { useTheme } from "../context/ThemeContext";
-import { RootStackParamList } from "../interfaces/interfaces";
 import { Anime } from "./Anime";
 import { Home } from "./Home";
-import UserList from "./UserList";
+import UserFollowList from "./UserFollowList";
+
+export type RootStackParamList = {
+  Home: undefined;
+  Anime: { id: number };
+  Following: undefined;
+};
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
@@ -29,7 +34,7 @@ const NavigationComponents = () => {
         }}
       >
         <Drawer.Screen component={Home} name="Home" />
-        <Drawer.Screen component={UserList} name="Following" />
+        <Drawer.Screen component={UserFollowList} name="Following" />
         <Drawer.Screen
           component={Anime}
           name="Anime"

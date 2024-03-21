@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, View } from "react-native";
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", gap: 8 },

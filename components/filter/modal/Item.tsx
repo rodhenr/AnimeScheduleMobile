@@ -1,17 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-type Props = {
-  name: string;
-  option: string;
-  allowMultipleSelection: boolean;
-  isSelected: boolean;
-  updateOption: (
-    categoryName: string,
-    optionName: string,
-    allowMultipleSelection: boolean,
-    isSelected: boolean
-  ) => void;
-};
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ItemProps } from "../Index.types";
 
 const styles = StyleSheet.create({
   modalOption: {
@@ -29,7 +17,7 @@ export const Item = ({
   allowMultipleSelection,
   isSelected,
   updateOption,
-}: Props) => {
+}: ItemProps) => {
   return (
     <TouchableOpacity
       onPress={() =>

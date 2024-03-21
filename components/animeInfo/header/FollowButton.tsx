@@ -6,10 +6,7 @@ import {
   TouchableHighlight,
   View,
 } from "react-native";
-import {
-  IFollowedAnime,
-  useFollowedAnimesContext,
-} from "../../../context/FollowedAnimesContext";
+import { useFollowedAnimesContext } from "../../../context/FollowedAnimesContext";
 import { useTheme } from "../../../context/ThemeContext";
 
 const styles = StyleSheet.create({

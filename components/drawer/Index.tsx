@@ -8,17 +8,16 @@ import {
   DrawerNavigationHelpers,
 } from "@react-navigation/drawer/lib/typescript/src/types";
 import { DrawerNavigationState, ParamListBase } from "@react-navigation/native";
-import { useState } from "react";
 import { Switch, Text, View } from "react-native";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 
-type Props = {
+type DrawerContentProps = {
   state: DrawerNavigationState<ParamListBase>;
   navigation: DrawerNavigationHelpers;
   descriptors: DrawerDescriptorMap;
 };
 
-const DrawerContent = (props: Props) => {
+const DrawerContent = (props: DrawerContentProps) => {
   const { colors, isDarkTheme, toggleTheme } = useTheme();
 
   return (
