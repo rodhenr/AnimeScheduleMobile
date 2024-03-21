@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../../context/ThemeContext";
+import { InfoItemProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,12 +14,7 @@ const styles = StyleSheet.create({
   text: { fontSize: 12 },
 });
 
-type Props = {
-  info: string | number | null;
-  title: string;
-};
-
-export const InfoItem = ({ info, title }: Props) => {
+export const InfoItem = ({ info, title }: InfoItemProps) => {
   const { colors } = useTheme();
 
   return (

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useFollowedAnimesContext } from "../../../context/FollowedAnimesContext";
 import { useTheme } from "../../../context/ThemeContext";
+import { FollowButtonProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,12 +20,7 @@ const styles = StyleSheet.create({
   text: { color: "#ededed", fontSize: 16 },
 });
 
-type Props = {
-  animeId: number;
-  animeName: string;
-};
-
-export const FollowButton = ({ animeId, animeName }: Props) => {
+export const FollowButton = ({ animeId, animeName }: FollowButtonProps) => {
   const { colors } = useTheme();
   const {
     data: followedAnimes,

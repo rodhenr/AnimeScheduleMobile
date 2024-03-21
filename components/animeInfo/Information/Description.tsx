@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
+import { DescriptionProps } from "./Index.types";
 import { InfoContainer } from "./infoContainer/Index";
 
 const styles = StyleSheet.create({
@@ -7,11 +8,7 @@ const styles = StyleSheet.create({
   description: { fontSize: 12, textAlign: "justify" },
 });
 
-type Props = {
-  description: string;
-};
-
-export const Description = ({ description }: Props) => {
+export const Description = ({ description }: DescriptionProps) => {
   const { colors } = useTheme();
 
   return (

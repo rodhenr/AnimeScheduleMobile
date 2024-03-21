@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import { getDayOfTheWeek } from "../../utils/dateUtils";
-
-type Props = { date: Date };
+import { DateInfoProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   dateContainer: {
@@ -13,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const DateInfo = ({ date }: Props) => {
+export const DateInfo = ({ date }: DateInfoProps) => {
   const { colors } = useTheme();
 
   return (

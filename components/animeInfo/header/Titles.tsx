@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import { TitlesType } from "../../../api/queries/AnimeInfoQueries.types";
 import { useTheme } from "../../../context/ThemeContext";
+import { TitlesProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   title: {
@@ -13,11 +13,7 @@ const styles = StyleSheet.create({
   secondaryTitle: { fontSize: 12 },
 });
 
-type Props = {
-  titles: TitlesType;
-};
-
-export const Titles = ({ titles }: Props) => {
+export const Titles = ({ titles }: TitlesProps) => {
   const { colors } = useTheme();
 
   return (

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
+import { GenresProps } from "./Index.types";
 import { InfoContainer } from "./infoContainer/Index";
 
 const styles = StyleSheet.create({
@@ -7,9 +8,7 @@ const styles = StyleSheet.create({
   itemContainer: { borderRadius: 4, paddingHorizontal: 8, paddingVertical: 4 },
 });
 
-type Props = { genres: string[] };
-
-const Genres = ({ genres }: Props) => {
+const Genres = ({ genres }: GenresProps) => {
   const { colors } = useTheme();
 
   return (

@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../../context/ThemeContext";
+import { InfoContainerProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: { gap: 4 },
@@ -11,12 +12,7 @@ const styles = StyleSheet.create({
   title: { fontWeight: "bold" },
 });
 
-type Props = {
-  children: React.ReactNode;
-  title: string;
-};
-
-export const InfoContainer = ({ children, title }: Props) => {
+export const InfoContainer = ({ children, title }: InfoContainerProps) => {
   const { colors } = useTheme();
 
   return (

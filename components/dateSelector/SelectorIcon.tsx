@@ -1,15 +1,13 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
-import { dateActionType } from "../../interfaces/interfaces";
+import { SelectorIconProps } from "./Index.types";
 
-type Props = {
-  iconName: "chevron-left" | "chevron-right";
-  updateDate: (type: dateActionType) => void;
-  type: dateActionType;
-};
-
-export const SelectorIcon = ({ iconName, updateDate, type }: Props) => {
+export const SelectorIcon = ({
+  iconName,
+  updateDate,
+  type,
+}: SelectorIconProps) => {
   const { colors } = useTheme();
 
   return (

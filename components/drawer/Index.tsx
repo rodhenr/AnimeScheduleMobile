@@ -3,19 +3,9 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import {
-  DrawerDescriptorMap,
-  DrawerNavigationHelpers,
-} from "@react-navigation/drawer/lib/typescript/src/types";
-import { DrawerNavigationState, ParamListBase } from "@react-navigation/native";
 import { Switch, Text, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
-
-type DrawerContentProps = {
-  state: DrawerNavigationState<ParamListBase>;
-  navigation: DrawerNavigationHelpers;
-  descriptors: DrawerDescriptorMap;
-};
+import { DrawerContentProps } from "./Index.types";
 
 const DrawerContent = (props: DrawerContentProps) => {
   const { colors, isDarkTheme, toggleTheme } = useTheme();

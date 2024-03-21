@@ -1,4 +1,5 @@
 import { FlatList, StyleSheet, View } from "react-native";
+import { DetailsProps } from "./Index.types";
 import { InfoContainer } from "./infoContainer/Index";
 import { InfoItem } from "./infoItem/Index";
 
@@ -7,17 +8,6 @@ const styles = StyleSheet.create({
   listContainer: { gap: 8 },
   listColumn: { gap: 8, justifyContent: "space-between" },
 });
-
-type Props = {
-  endDate: string | null;
-  episodes: number;
-  season: string;
-  seasonYear: number;
-  source: string;
-  startDate: string;
-  status: string;
-  type: string;
-};
 
 export const Details = ({
   endDate,
@@ -28,7 +18,7 @@ export const Details = ({
   startDate,
   status,
   type,
-}: Props) => {
+}: DetailsProps) => {
   const data = [
     { info: status, title: "Status" },
     { info: type, title: "Type" },

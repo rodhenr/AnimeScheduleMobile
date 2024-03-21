@@ -1,11 +1,7 @@
 import { Image, StyleSheet, View } from "react-native";
-import {
-  CountriesType,
-  NextEpisodeType,
-  TitlesType,
-} from "../../../api/queries/AnimeInfoQueries.types";
 import { Flag } from "./Flag";
 import { FollowButton } from "./FollowButton";
+import { HeaderProps } from "./Index.types";
 import { NextEpisode } from "./NextEpisode";
 import { Rating } from "./Rating";
 import { Titles } from "./Titles";
@@ -20,16 +16,6 @@ const styles = StyleSheet.create({
   },
 });
 
-type Props = {
-  countryOfOrigin: CountriesType;
-  cover: string;
-  id: number;
-  name: string;
-  nextEpisodeInfo: NextEpisodeType | null;
-  score: number;
-  titles: TitlesType;
-};
-
 export const Header = ({
   countryOfOrigin,
   cover,
@@ -38,7 +24,7 @@ export const Header = ({
   nextEpisodeInfo,
   score,
   titles,
-}: Props) => {
+}: HeaderProps) => {
   return (
     <View style={styles.container}>
       <View>

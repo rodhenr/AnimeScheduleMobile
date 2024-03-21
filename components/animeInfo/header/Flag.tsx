@@ -1,5 +1,5 @@
 import { Image, StyleSheet, View } from "react-native";
-import { CountriesType } from "../../../api/queries/AnimeInfoQueries.types";
+import { FlagProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: {},
@@ -12,11 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type Props = {
-  flagName: CountriesType;
-};
-
-export const Flag = ({ flagName }: Props) => {
+export const Flag = ({ flagName }: FlagProps) => {
   let imagePath;
 
   switch (flagName) {

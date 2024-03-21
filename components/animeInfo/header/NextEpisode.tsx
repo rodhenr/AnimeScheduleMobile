@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../../../context/ThemeContext";
 import { timeUntil } from "../../../utils/dateUtils";
+import { NextEpisodeProps } from "./Index.types";
 
 const styles = StyleSheet.create({
   container: {
@@ -12,12 +13,7 @@ const styles = StyleSheet.create({
   text: { fontSize: 14, textAlign: "center" },
 });
 
-type Props = {
-  airingAt: string;
-  episode: number;
-};
-
-export const NextEpisode = ({ airingAt, episode }: Props) => {
+export const NextEpisode = ({ airingAt, episode }: NextEpisodeProps) => {
   const { colors } = useTheme();
 
   return (

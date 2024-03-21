@@ -1,17 +1,13 @@
 import { StyleSheet, View } from "react-native";
+import { AnimeInfoProps } from "./Index.types";
 import { Information } from "./Information/Index";
 import { Header } from "./header/Index";
-import { AnimeInfoType } from "../../api/queries/AnimeInfoQueries.types";
 
 const styles = StyleSheet.create({
   container: { gap: 16 },
 });
 
-type Props = {
-  data: AnimeInfoType;
-};
-
-export const AnimeInfo = ({ data }: Props) => {
+export const AnimeInfo = ({ data }: AnimeInfoProps) => {
   return (
     <View style={styles.container}>
       <Header

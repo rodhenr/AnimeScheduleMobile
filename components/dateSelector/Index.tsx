@@ -1,13 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
-import { DateInfo } from "./DateInfo";
-import { SelectorIcon } from "./SelectorIcon";
 import { DateActionType } from "../../utils/dateUtils";
-
-type Props = {
-  updateDate: (type: DateActionType) => void;
-  date: Date;
-};
+import { DateInfo } from "./DateInfo";
+import { DateSelectorProps } from "./Index.types";
+import { SelectorIcon } from "./SelectorIcon";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const DateSelector = ({ date, updateDate }: Props) => {
+export const DateSelector = ({ date, updateDate }: DateSelectorProps) => {
   const { colors } = useTheme();
 
   return (
