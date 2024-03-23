@@ -31,7 +31,7 @@ export const FilterModal = ({
   const { colors } = useTheme();
 
   return (
-    <Modal style={styles.root}>
+    <Modal style={styles.root} testID="filterModal">
       <ScrollView style={[styles.root, { backgroundColor: colors.background }]}>
         <View
           style={[

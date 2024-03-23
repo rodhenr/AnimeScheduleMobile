@@ -17,7 +17,7 @@ export const Titles = ({ titles }: TitlesProps) => {
   const { colors } = useTheme();
 
   return (
-    <View>
+    <View testID="titles">
       <Text style={[styles.title, styles.mainTitle, { color: colors.text }]}>
         {titles.english ?? titles.romaji}
       </Text>

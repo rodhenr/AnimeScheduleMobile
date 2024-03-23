@@ -19,7 +19,7 @@ export const Information = ({
   type,
 }: InformationProps) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="information">
       <Description description={description} />
       <Details
         endDate={endDate}

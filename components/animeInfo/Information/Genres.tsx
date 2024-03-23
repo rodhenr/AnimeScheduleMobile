@@ -13,7 +13,7 @@ const Genres = ({ genres }: GenresProps) => {
 
   return (
     <InfoContainer title="Genres">
-      <View style={styles.container}>
+      <View style={styles.container} testID="genres">
         {genres.map((g) => (
           <View
             key={g}

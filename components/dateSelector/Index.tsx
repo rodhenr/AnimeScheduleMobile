@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import { DateActionType } from "../../utils/dateUtils";
-import { DateInfo } from "./DateInfo";
+import { DateInfo } from "./info/Index";
 import { DateSelectorProps } from "./Index.types";
-import { SelectorIcon } from "./SelectorIcon";
+import { SelectorIcon } from "./icon/Index";
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +29,7 @@ export const DateSelector = ({ date, updateDate }: DateSelectorProps) => {
         styles.container,
         { backgroundColor: colors.backgroundSecondary },
       ]}
+      testID="dateSelector"
     >
       <SelectorIcon
         iconName={"chevron-left"}

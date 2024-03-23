@@ -43,7 +43,7 @@ export const FollowButton = ({ animeId, animeName }: FollowButtonProps) => {
   };
 
   return (
-    <View>
+    <View testID="followButton">
       {loadingFollowedAnimes ? (
         <ActivityIndicator size="large" color={colors.text} />
       ) : (

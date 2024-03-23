@@ -22,6 +22,7 @@ export const Filter = ({ onClick }: FilterProps) => {
         ,
         { backgroundColor: colors.backgroundSecondary },
       ]}
+      testID="filter"
     >
       <MaterialCommunityIcons name="cog" size={20} color={colors.text} />
     </TouchableOpacity>

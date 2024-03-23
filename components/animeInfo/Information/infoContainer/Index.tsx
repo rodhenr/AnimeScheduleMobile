@@ -16,7 +16,7 @@ export const InfoContainer = ({ children, title }: InfoContainerProps) => {
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container]} testID="infoContainer">
       <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
       <View
         style={[

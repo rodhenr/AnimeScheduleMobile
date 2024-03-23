@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 
 export const AnimeInfo = ({ data }: AnimeInfoProps) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="animeInfo">
       <Header
         countryOfOrigin={data.countryOfOrigin}
         cover={data.coverImage}

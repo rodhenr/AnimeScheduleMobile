@@ -26,7 +26,7 @@ export const Header = ({
   titles,
 }: HeaderProps) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="header">
       <View>
         <Image src={cover} alt="cover" style={styles.image} />
       </View>

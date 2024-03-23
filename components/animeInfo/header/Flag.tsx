@@ -31,7 +31,7 @@ export const Flag = ({ flagName }: FlagProps) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="flag">
       <Image source={imagePath} style={styles.image} />
     </View>
   );

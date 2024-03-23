@@ -14,6 +14,7 @@ const DrawerContent = (props: DrawerContentProps) => {
     <DrawerContentScrollView
       {...props}
       style={[{ backgroundColor: colors.background, flex: 1 }]}
+      testID="drawerContent"
     >
       <DrawerItemList {...props} />
       <DrawerItem

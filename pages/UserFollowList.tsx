@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { ClearButton } from "../components/userList/clearButton/Index";
-import { AnimeItem } from "../components/userList/item/Index";
+import { ClearButton } from "../components/followList/clearButton/Index";
+import { AnimeItem } from "../components/followList/item/Index";
 import { useFollowedAnimesContext } from "../context/FollowedAnimesContext";
 import { useTheme } from "../context/ThemeContext";
 

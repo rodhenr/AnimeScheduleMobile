@@ -7,7 +7,7 @@ export const CloseIcon = ({ onClick }: CloseIconProps) => {
   const { colors } = useTheme();
 
   return (
-    <TouchableOpacity onPress={onClick}>
+    <TouchableOpacity onPress={onClick} testID="closeButton">
       <MaterialCommunityIcons name="close" size={24} color={colors.text} />
     </TouchableOpacity>
   );

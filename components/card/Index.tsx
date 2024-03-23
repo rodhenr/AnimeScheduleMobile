@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import { RootStackParamList } from "../../pages/Index";
-import { EpisodeInfo } from "./EpisodeInfo";
+import { EpisodeInfo } from "./episode/Index";
 import { AnimeCardProps } from "./Index.types";
-import { NameInfo } from "./NameInfo";
+import { NameInfo } from "./name/Index";
 
 const styles = StyleSheet.create({
   container: { borderRadius: 4, opacity: 0.9 },
@@ -40,6 +40,7 @@ export const AnimeCard = ({ data, isFollowing }: AnimeCardProps) => {
           borderWidth: 4,
         },
       ]}
+      testID="animeCard"
     >
       <TouchableOpacity
         onPress={() => navigation.navigate("Anime", { id: data.mediaId })}

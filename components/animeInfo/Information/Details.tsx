@@ -34,7 +34,7 @@ export const Details = ({
   ];
   return (
     <InfoContainer title="Information">
-      <View style={styles.container}>
+      <View style={styles.container} testID="details">
         <FlatList
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}

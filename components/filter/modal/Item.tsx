@@ -23,6 +23,7 @@ export const Item = ({
       onPress={() =>
         updateOption(name, option, allowMultipleSelection, isSelected)
       }
+      testID="item"
     >
       <Text
         style={[

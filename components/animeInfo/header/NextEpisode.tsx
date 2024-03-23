@@ -22,6 +22,7 @@ export const NextEpisode = ({ airingAt, episode }: NextEpisodeProps) => {
         styles.container,
         { backgroundColor: colors.backgroundSecondary },
       ]}
+      testID="nextEpisode"
     >
       <Text style={[styles.text, { color: colors.text }]}>
         Episode {episode} in {timeUntil(new Date(airingAt))}

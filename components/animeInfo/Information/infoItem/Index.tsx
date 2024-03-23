@@ -18,7 +18,10 @@ export const InfoItem = ({ info, title }: InfoItemProps) => {
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: colors.background }]}
+      testID="infoItem"
+    >
       <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
       <Text style={[styles.text, { color: colors.text }]}>{info ?? "-"}</Text>
     </View>

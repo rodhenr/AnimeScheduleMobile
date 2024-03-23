@@ -20,7 +20,7 @@ export const ItemGroup = ({
   const { colors } = useTheme();
 
   return (
-    <View style={{ gap: 8 }}>
+    <View style={{ gap: 8 }} testID="itemGroup">
       <Text style={{ color: colors.text }}>{name}</Text>
       <View style={styles.modalOptionsContainer}>
         {options.map((op) => (

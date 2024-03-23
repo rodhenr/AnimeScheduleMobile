@@ -13,7 +13,7 @@ export const Description = ({ description }: DescriptionProps) => {
 
   return (
     <InfoContainer title="Description">
-      <View style={styles.container}>
+      <View style={styles.container} testID="description">
         <Text style={[styles.description, { color: colors.text }]}>
           {description}
         </Text>

@@ -12,7 +12,7 @@ export const Rating = ({ score }: RatingProps) => {
   const emptyStars = 5 - fullStars - halfStars;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="rating">
       {[...Array(fullStars)].map((_, index) => (
         <Ionicons key={index} name="star" size={24} color="#b8b500" />
       ))}
