@@ -1,9 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
+  FollowedAnimeType,
   FollowedAnimesContextProps,
   FollowedAnimesContextType,
-  FollowedAnimeType,
 } from "./FollowedAnimesContext.types";
 
 const FollowedAnimesContext = createContext<FollowedAnimesContextType>({

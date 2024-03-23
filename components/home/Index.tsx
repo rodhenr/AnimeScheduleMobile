@@ -75,7 +75,7 @@ export const HomeContainer = ({
   }, [modalOptions, scheduleData, followedAnimes]);
 
   return (
-    <View style={styles.cardsContainer}>
+    <View style={styles.cardsContainer} testID="cardsContainer">
       {filterAndSortData.map((anime) => (
         <AnimeCard
           data={anime}

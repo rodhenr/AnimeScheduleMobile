@@ -29,7 +29,7 @@ export const HomeOptions = ({
   };
 
   return (
-    <View style={styles.filterContainer}>
+    <View style={styles.filterContainer} testID="homeOptions">
       {date && <DateSelector date={date!} updateDate={updateDate} />}
       <Filter onClick={changeFilterModalState} />
     </View>
