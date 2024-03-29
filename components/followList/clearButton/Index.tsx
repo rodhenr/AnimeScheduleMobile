@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ClearButton = ({ removeAll }: ClearButtonProps) => {
+export const ClearButton = ({ hasItems, removeAll }: ClearButtonProps) => {
   const { colors } = useTheme();
 
   return (
@@ -30,8 +30,13 @@ export const ClearButton = ({ removeAll }: ClearButtonProps) => {
         onPress={() => removeAll()}
         style={[
           styles.clearButton,
-          { backgroundColor: colors.backgroundNotFollowing },
+          {
+            backgroundColor: hasItems
+              ? colors.backgroundNotFollowing
+              : colors.disabled,
+          },
         ]}
+        disabled={!hasItems}
       >
         <Text style={[styles.clearButtonText, { alignSelf: "flex-end" }]}>
           Clear

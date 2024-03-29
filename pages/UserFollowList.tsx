@@ -42,7 +42,7 @@ const UserFollowList = () => {
         />
       ) : (
         <View style={styles.listContainer}>
-          <ClearButton removeAll={removeAll} />
+          <ClearButton hasItems={data.length > 0} removeAll={removeAll} />
           <FlatList
             contentContainerStyle={{
               padding: 16,

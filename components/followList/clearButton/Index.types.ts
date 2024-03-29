@@ -1,1 +1,1 @@
-export type ClearButtonProps = { removeAll: () => void };
+export type ClearButtonProps = { hasItems: boolean; removeAll: () => void };
